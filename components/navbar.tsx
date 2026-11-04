@@ -5,6 +5,7 @@ import { LogIn, Menu, X } from "lucide-react";
 import { Btn } from "./ui";
 import ThemeToggle from "./theme-toggle";
 import Image from "next/image";
+import Link from "next/link";
 
 const links = ["About", "Fund", "Tools", "Platform", "Education", "Roadmap", "Contact"];
 
@@ -42,28 +43,24 @@ export default function Navbar() {
     <header className={`fixed inset-x-0 top-0 z-50 transition-all ${scrolled ? "border-b border-line bg-bg/80 backdrop-blur-xl" : ""}`}>
       <nav aria-label="Main" className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3">
     
-    
-   <a href="#" className="flex items-center gap-2 text-xl font-extrabold text-fg">
-  {/* 🟢 LIGHT mode logo */}
-  <Image
-    src="/Nexorax-Purple-Gold-Ribbon-Logo.png"
-    alt="Nexorax logo"
-    width={160} 
-    height={40} 
-    className="h-8 w-auto object-contain dark:hidden sm:h-10"
-    priority
-  />
-  
-  {/* 🌙 DARK mode logo */}
-  <Image
-    src="/Nexorax-Purple-and-Gold-Ribbon-Logo.png"
-    alt="Nexorax logo"
-    width={160}
-    height={40}
-    className="hidden h-8 w-auto object-contain dark:block sm:h-10"
-    priority
-  />
-</a>
+        <Link href="/" className="flex items-center gap-2 text-xl font-extrabold text-fg">
+          <Image
+            src="/Nexorax-Purple-Gold-Ribbon-Logo.png"
+            alt="Nexorax logo"
+            width={160} 
+            height={40} 
+            className="h-8 w-auto object-contain dark:hidden sm:h-10"
+            priority
+          />
+          <Image
+            src="/Nexorax-Purple-and-Gold-Ribbon-Logo.png"
+            alt="Nexorax logo"
+            width={160}
+            height={40}
+            className="hidden h-8 w-auto object-contain dark:block sm:h-10"
+            priority
+          />
+        </Link>
 
         <ul className="hidden gap-7 lg:flex">
           {links.map((l) => (
@@ -75,11 +72,15 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
+        
+        {/* 💻 DESKTOP MENU */}
         <div className="hidden items-center gap-4 lg:flex">
           <ThemeToggle />
           <a href="/login" className="text-sm text-soft hover:text-fg">Login</a>
           <Btn href="/register">Get Started</Btn>
         </div>
+
+        {/* 📱 MOBILE MENU ICONS */}
         <div className="flex items-center gap-3 lg:hidden">
           <ThemeToggle />
           <a href="/login" aria-label="Login" className="text-fg"><LogIn size={20} /></a>
@@ -88,6 +89,8 @@ export default function Navbar() {
           </button>
         </div>
       </nav>
+
+      {/* 📱 MOBILE DROPDOWN MENU */}
       {open && (
         <div className="border-t border-line bg-bg/95 px-5 pb-6 backdrop-blur-xl lg:hidden">
           {links.map((l) => (
