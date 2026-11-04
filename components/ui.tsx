@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { ReactNode, useId } from "react";
+import Link from "next/link"; // 👈 Import kiya
 
 export const Reveal = ({ children, d = 0, className = "" }: { children: ReactNode; d?: number; className?: string }) => (
   <motion.div
@@ -37,18 +38,42 @@ export const Card = ({ children, className = "" }: { children: ReactNode; classN
   </motion.div>
 );
 
-export const Btn = ({ children, ghost, href = "#" }: { children: ReactNode; ghost?: boolean; href?: string }) => (
-  <a
-    href={href}
-    className={`inline-flex items-center justify-center rounded-full px-7 py-3.5 text-sm font-bold transition-all ${
-      ghost
-        ? "border border-line bg-surface text-fg hover:border-gold"
-        : "bg-gold text-[#1a1033] shadow-[0_0_28px_rgba(214,168,79,.4)] hover:shadow-[0_0_44px_rgba(214,168,79,.65)]"
-    }`}
-  >
-    {children}
-  </a>
-);
+// 👇 UPDATED BTN COMPONENT 👇
+export const Btn = ({ 
+  children, 
+  ghost, 
+  href = "#", 
+  className = "", 
+  onClick 
+}: { 
+  children: ReactNode; 
+  ghost?: boolean; 
+  href?: string; 
+  className?: string; 
+  onClick?: () => void; 
+}) => {
+  const styles = `inline-flex items-center justify-center rounded-full px-7 py-3.5 text-sm font-bold transition-all ${
+    ghost
+      ? "border border-line bg-surface text-fg hover:border-gold"
+      : "bg-gold text-[#1a1033] shadow-[0_0_28px_rgba(214,168,79,.4)] hover:shadow-[0_0_44px_rgba(214,168,79,.65)]"
+  } ${className}`;
+
+  // Agar internal link hai (jaise /register)
+  if (href.startsWith("/")) {
+    return (
+      <Link href={href} onClick={onClick} className={styles}>
+        {children}
+      </Link>
+    );
+  }
+
+  // Agar external ya '#' link hai
+  return (
+    <a href={href} onClick={onClick} className={styles}>
+      {children}
+    </a>
+  );
+};
 
 export const Mark = ({ className = "h-9 w-9" }: { className?: string }) => {
   const id = useId().replace(/:/g, "");
