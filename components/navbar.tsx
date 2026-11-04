@@ -43,24 +43,24 @@ export default function Navbar() {
       <nav aria-label="Main" className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3">
     
     
-     <a href="#" className="flex items-center gap-2 text-xl font-extrabold text-fg">
-  {/*  LIGHT mode logo */}
+   <a href="#" className="flex items-center gap-2 text-xl font-extrabold text-fg">
+  {/* 🟢 LIGHT mode logo */}
   <Image
     src="/Nexorax-Purple-Gold-Ribbon-Logo.png"
     alt="Nexorax logo"
-    width={200} 
-    height={48} 
-    className="h-12 w-auto object-contain dark:hidden"
+    width={160} 
+    height={40} 
+    className="h-8 w-auto object-contain dark:hidden sm:h-10"
     priority
   />
   
-  {/*  DARK mode logo  */}
+  {/* 🌙 DARK mode logo */}
   <Image
     src="/Nexorax-Purple-and-Gold-Ribbon-Logo.png"
     alt="Nexorax logo"
-    width={200}
-    height={48}
-    className="hidden h-12 w-auto object-contain dark:block"
+    width={160}
+    height={40}
+    className="hidden h-8 w-auto object-contain dark:block sm:h-10"
     priority
   />
 </a>

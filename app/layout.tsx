@@ -13,6 +13,11 @@ export const metadata: Metadata = {
     description: "Forex and crypto education, AI-powered tools and expert-supervised fund management.",
     type: "website",
   },
+   icons: {
+    icon: "/favicon.png", 
+    shortcut: "/favicon.png",
+    apple: "/favicon.png", 
+  },
 };
 
 // Light is the default; dark is applied before paint if the visitor chose it earlier.
