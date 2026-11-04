@@ -1,0 +1,76 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #faf8ff;
+  --bg2: #f0ebfc;
+  --fg: #1a1033;
+  --soft: #3b3160;
+  --muted: #655c85;
+  --line: rgba(76, 29, 149, 0.16);
+  --surface: rgba(255, 255, 255, 0.78);
+  --violet: #7c3aed;
+  --gold: #d6a84f;
+  --goldtext: #8a5a00;
+  --hero: #e6d9ff;
+  --grid: rgba(124, 58, 237, 0.1);
+  color-scheme: light;
+}
+.dark {
+  --bg: #07040f;
+  --bg2: #120a2a;
+  --fg: #ffffff;
+  --soft: #ddd6ee;
+  --muted: #9a8fb8;
+  --line: rgba(255, 255, 255, 0.1);
+  --surface: rgba(255, 255, 255, 0.04);
+  --violet: #8b5cf6;
+  --gold: #d6a84f;
+  --goldtext: #d6a84f;
+  --hero: #2a1260;
+  --grid: rgba(139, 92, 246, 0.1);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg2: var(--bg2);
+  --color-fg: var(--fg);
+  --color-soft: var(--soft);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-surface: var(--surface);
+  --color-violet: var(--violet);
+  --color-gold: var(--gold);
+  --color-goldtext: var(--goldtext);
+}
+
+html { scroll-behavior: smooth; }
+body { overflow-x: hidden; font-family: var(--font-manrope), system-ui, sans-serif; transition: background-color .3s, color .3s; }
+:focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; }
+
+.grid-bg {
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+}
+
+@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee { animation: marquee 34s linear infinite; }
+.marquee:hover { animation-play-state: paused; }
+@keyframes eq { 0%, 100% { transform: scaleY(.35); } 50% { transform: scaleY(1); } }
+.eq { transform-box: fill-box; transform-origin: 50% 100%; animation: eq 1.8s ease-in-out infinite; }
+@keyframes dash { to { stroke-dashoffset: -24; } }
+.dash, .arc { stroke-dasharray: 6 6; animation: dash 1.6s linear infinite; }
+@keyframes pulse2 { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .5; transform: scale(1.5); } }
+.pulse { transform-box: fill-box; transform-origin: center; animation: pulse2 1.6s ease-in-out infinite; }
+@keyframes blink { 0%, 92%, 100% { opacity: 1; } 96% { opacity: .1; } }
+.blink { animation: blink 3s infinite; }
+@keyframes tile { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
+.tile { animation: tile 2.4s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(-9px); } }
+.candle-bob { animation: bob 4.5s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee, .eq, .dash, .arc, .pulse, .blink, .tile, .candle-bob { animation: none; }
+}
