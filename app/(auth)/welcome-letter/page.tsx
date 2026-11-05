@@ -78,7 +78,16 @@ export default function WelcomeLetter() {
                       alt="NEXORAX"
                       width={192}
                       height={128}
-                      className="h-24 w-auto sm:h-28"
+                      className="h-24 w-auto object-contain dark:hidden sm:h-28"
+                      priority
+                    />
+                    <Image
+                      src="/Nexorax-Purple-and-Gold-Ribbon-Logo.png"
+                      alt="NEXORAX"
+                      width={192}
+                      height={128}
+                      className="hidden h-24 w-auto object-contain dark:block sm:h-28"
+                      priority
                     />
                   </Link>
 

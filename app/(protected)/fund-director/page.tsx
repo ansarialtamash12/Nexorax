@@ -1990,18 +1990,18 @@ export default function FundDirectorPage() {
               <Surface className="p-5 sm:p-6 md:p-8">
                 <div className="mb-6 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
                   <h2 className="flex items-center gap-3 text-lg font-bold text-slate-800 dark:text-white sm:text-xl">
-                    <span className="h-6 w-1 rounded-full bg-gradient-to-b from-cyan-500 to-blue-600" />
+                    <span className="h-6 w-1 rounded-full bg-gradient-to-b from-violet to-gold" />
                     Transfer To Deposit Wallet
                   </h2>
                 </div>
 
-                <div className="mb-6 flex flex-col items-start justify-between gap-3 rounded-xl border border-cyan-100/70 bg-gradient-to-r from-cyan-50/70 to-blue-50/70 p-4 dark:border-cyan-800/30 dark:from-cyan-900/10 dark:to-blue-900/10 sm:flex-row sm:items-center">
-                  <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                <div className="mb-6 flex flex-col items-start justify-between gap-3 rounded-xl border border-violet/20 bg-gradient-to-r from-violet/10 to-gold/15 p-4 text-fg dark:border-violet/30 dark:from-violet/15 dark:to-gold/10 sm:flex-row sm:items-center">
+                  <p className="text-sm font-semibold text-fg">
                     {otpSent ? "Transfer confirmation" : "Income Wallet Balance"}
                   </p>
-                  <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                  <p className="text-sm font-semibold text-fg">
                     Balance:{" "}
-                    <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+                    <span className="font-bold text-goldtext dark:text-gold">
                       {money(otpSent ? balances.deposit : balances.performance)}
                     </span>
                   </p>
@@ -2087,12 +2087,12 @@ export default function FundDirectorPage() {
               <Surface className="p-5 sm:p-6 md:p-8">
                 <div className="mb-6 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
                   <h2 className="flex items-center gap-3 text-lg font-bold text-slate-800 dark:text-white sm:text-xl">
-                    <span className="h-6 w-1 rounded-full bg-gradient-to-b from-cyan-500 to-blue-600" />
+                    <span className="h-6 w-1 rounded-full bg-gradient-to-b from-violet to-gold" />
                     Transfer To Deposit Wallet
                   </h2>
-                  <div className="rounded-xl border border-cyan-100/70 bg-gradient-to-r from-cyan-50/70 to-blue-50/70 px-4 py-2 text-sm font-semibold text-slate-700 dark:border-cyan-800/30 dark:from-cyan-900/10 dark:to-blue-900/10 dark:text-slate-300">
+                  <div className="rounded-xl border border-violet/20 bg-gradient-to-r from-violet/10 to-gold/15 px-4 py-2 text-sm font-semibold text-fg dark:border-violet/30 dark:from-violet/15 dark:to-gold/10">
                     Balance:{" "}
-                    <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+                    <span className="font-bold text-goldtext dark:text-gold">
                       {money(balances.deposit)}
                     </span>
                   </div>
@@ -2224,7 +2224,7 @@ export default function FundDirectorPage() {
               <Surface className="p-5 sm:p-6 md:p-8">
                 <div className="mb-6 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
                   <h2 className="flex items-center gap-3 text-lg font-bold text-slate-800 dark:text-white sm:text-xl">
-                    <span className="h-6 w-1 rounded-full bg-gradient-to-b from-cyan-500 to-blue-600" />
+                    <span className="h-6 w-1 rounded-full bg-gradient-to-b from-violet to-gold" />
                     Withdrawal Request
                   </h2>
                   <div className="flex items-center gap-2 text-xs text-slate-400 dark:text-slate-500">
@@ -2233,14 +2233,14 @@ export default function FundDirectorPage() {
                   </div>
                 </div>
 
-                <div className="mb-6 flex flex-col items-start justify-between gap-4 rounded-xl border border-cyan-100/70 bg-gradient-to-r from-cyan-50/70 to-blue-50/70 p-4 dark:border-cyan-800/30 dark:from-cyan-900/10 dark:to-blue-900/10 sm:flex-row sm:items-center">
-                  <div className="flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-300">
-                    <Wallet className="h-5 w-5 shrink-0 text-cyan-500 dark:text-cyan-400" />
+                <div className="mb-6 flex flex-col items-start justify-between gap-4 rounded-xl border border-violet/20 bg-gradient-to-r from-violet/10 to-gold/15 p-4 text-fg dark:border-violet/30 dark:from-violet/15 dark:to-gold/10 sm:flex-row sm:items-center">
+                  <div className="flex items-center gap-3 text-sm font-medium text-fg">
+                    <Wallet className="h-5 w-5 shrink-0 text-violet" />
                     <span>Income Wallet</span>
                   </div>
-                  <div className="whitespace-nowrap text-sm font-semibold text-slate-700 dark:text-slate-300">
+                  <div className="whitespace-nowrap text-sm font-semibold text-fg">
                     Balance:{" "}
-                    <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+                    <span className="font-bold text-goldtext dark:text-gold">
                       {money(balances.performance)}
                     </span>
                   </div>

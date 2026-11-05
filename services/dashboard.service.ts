@@ -26,6 +26,7 @@ export interface DashboardData {
   ActiveLicensee: number;
   WorkingWallet: number;
   DepositWallet: number;
+  TradingWallet?: number;
   ROIWallet: number;
   TradingPackage?: number;
   DirectBonus?: number;

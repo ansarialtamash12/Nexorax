@@ -275,9 +275,18 @@ export function Navbar() {
 
   // Wallet Data (Screenshot ke hisaab se)
   const wallets = [
+
+    {
+      id: 'performance',
+      name: 'Working Rewards Wallet',
+      balance: walletData?.WorkingWallet ? `$${Number(walletData.WorkingWallet).toFixed(4)}` : '$0.0000',
+      icon: TrendingUp,
+      color: 'var(--portal-accent)',
+      bg: 'var(--portal-accent-soft)'
+    },
     {
       id: 'deposit',
-      name: 'Deposit Wallet',
+      name: 'USD Funding Wallet',
       balance: walletData?.DepositWallet ? `$${Number(walletData.DepositWallet).toFixed(4)}` : '$0.0000',
       icon: Briefcase,
       color: 'var(--portal-accent)',
@@ -285,11 +294,11 @@ export function Navbar() {
     },
     {
       id: 'performance',
-      name: 'Income Wallet',
-      balance: walletData?.WorkingWallet ? `$${Number(walletData.WorkingWallet).toFixed(4)}` : '$0.0000',
+      name: 'Trading Rewards Wallet',
+      balance: walletData?.TradingWallet ? `$${Number(walletData.TradingWallet).toFixed(4)}` : '$0.0000',
       icon: TrendingUp,
-      color: 'var(--portal-gold)',
-      bg: 'var(--portal-gold-soft)'
+      color: 'var(--portal-accent)',
+      bg: 'var(--portal-accent-soft)'
     },
   ];
 
@@ -310,7 +319,7 @@ export function Navbar() {
             src={
               mounted && theme === "light"
                 ? "/Nexorax-Purple-Gold-Ribbon-Logo.png"
-                : "/Nexorax-Purple-Gold-Ribbon-Logo.png"
+                : "/Nexorax-Purple-and-Gold-Ribbon-Logo.png"
             }
             alt="NEXORAX"
             width={150}
@@ -335,7 +344,7 @@ export function Navbar() {
                     type="button"
                     className={cn(
                       "flex items-center gap-2 text-sm font-medium transition-colors",
-                      isActive ? "" : "hover:text-[#10C7F4]",
+                      isActive ? "" : "hover:text-violet",
                     )}
                     style={{ color: isActive ? "var(--portal-accent)" : (!mounted || theme === 'dark') ? '#E2E8F0' : '#334155' }}
                     aria-expanded={openDropdown === item.label}
@@ -387,7 +396,7 @@ export function Navbar() {
                 href={item.href}
                 className={cn(
                   "flex items-center gap-2 text-sm font-medium transition-colors",
-                  isActive ? "" : "hover:text-[#10C7F4]",
+                  isActive ? "" : "hover:text-violet",
                 )}
                 style={{ color: isActive ? "var(--portal-accent)" : (!mounted || theme === 'dark') ? '#E2E8F0' : '#334155' }}
               >
@@ -427,22 +436,28 @@ export function Navbar() {
           </button>
 
           {walletOpen && (
-            <div className="absolute right-0 top-full z-50 mt-3 w-[320px] rounded-2xl border shadow-2xl bg-white dark:bg-[#0B1021] border-gray-200 dark:border-[#1E293B] dark:shadow-black/50 overflow-hidden">
+            <div className="absolute right-0 top-full z-50 mt-3 w-max min-w-[280px] max-w-[90vw] rounded-2xl border shadow-2xl bg-white dark:bg-[#0B1021] border-gray-200 dark:border-[#1E293B] dark:shadow-black/50 overflow-hidden">
 
               {/* Header */}
-              <div className="flex items-center justify-between p-4 border-b border-gray-100 dark:border-[#1E293B]">
+              <div className="flex items-center justify-between gap-6 p-4 border-b border-gray-100 dark:border-[#1E293B]">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100 text-green-600">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-green-100 text-green-600">
                     <Wallet size={20} />
                   </div>
+
                   <div>
-                    <h3 className="text-sm font-bold text-gray-900 dark:text-white">Wallet Balance</h3>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">Your current balances</p>
+                    <h3 className="text-sm font-bold text-gray-900 dark:text-white">
+                      Wallet Balance
+                    </h3>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      Your current balances
+                    </p>
                   </div>
                 </div>
+
                 <button
                   onClick={() => setWalletOpen(false)}
-                  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
+                  className="shrink-0 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
                 >
                   <X size={18} />
                 </button>
@@ -453,22 +468,33 @@ export function Navbar() {
                 {wallets.map((wallet) => (
                   <div
                     key={wallet.id}
-                    className="flex items-center justify-between p-3 rounded-xl transition-colors hover:opacity-90"
+                    className="flex items-center justify-between gap-8 p-3 rounded-xl transition-colors hover:opacity-90"
                     style={{ backgroundColor: wallet.bg }}
                   >
                     <div className="flex items-center gap-3">
-                      {/* Colored Dot */}
-                      <div className="h-2 w-2 rounded-full" style={{ backgroundColor: wallet.color }} />
+                      <div
+                        className="h-2 w-2 shrink-0 rounded-full"
+                        style={{ backgroundColor: wallet.color }}
+                      />
 
-                      {/* Icon & Name */}
-                      <wallet.icon size={18} style={{ color: wallet.color }} />
-                      <span className="text-sm font-semibold" style={{ color: wallet.color }}>
+                      <wallet.icon
+                        size={18}
+                        className="shrink-0"
+                        style={{ color: wallet.color }}
+                      />
+
+                      <span
+                        className="text-sm font-semibold whitespace-nowrap"
+                        style={{ color: wallet.color }}
+                      >
                         {wallet.name}
                       </span>
                     </div>
 
-                    {/* Balance */}
-                    <span className="text-sm font-bold" style={{ color: wallet.color }}>
+                    <span
+                      className="text-sm font-bold whitespace-nowrap"
+                      style={{ color: wallet.color }}
+                    >
                       {wallet.balance}
                     </span>
                   </div>
