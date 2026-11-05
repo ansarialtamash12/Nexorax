@@ -8,10 +8,12 @@ npm run dev
 npm run build
 ```
 
-The marketing homepage is at `/`. The migrated user portal includes `/login`,
-`/register`, and the protected dashboard routes (for example, `/dashboard`).
+The marketing homepage is at `/`. The user portal includes `/login`,
+`/register`, and protected dashboard routes (for example, `/dashboard`). SPR
+Admin is available at `/spr-admin` with its own login and session.
 Set the backend and authentication values from `.env.example` before using
-login, registration, or server-backed dashboard features.
+login, registration, or server-backed dashboard features. SPR Admin uses
+`SPR_ADMIN_BACKEND_API_URL` when set and otherwise reuses `BACKEND_API_URL`.
 
 ## Notes
 - Light theme is the default. The sun/moon button in the navbar switches to dark mode and remembers the choice. Colors live as CSS variables in `app/globals.css`.

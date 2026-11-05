@@ -237,7 +237,7 @@ export default function AIBUSINESSHUB() {
 
         {/* Header Card */}
         <div
-          className="relative rounded-2xl overflow-hidden mb-6 shadow-[0_12px_48px_rgba(11,16,33,0.18)] dark:shadow-[0_12px_48px_rgba(0,0,0,0.4)]"
+          className="ai-business-hub-summary relative rounded-2xl overflow-hidden mb-6 shadow-[0_12px_48px_rgba(11,16,33,0.18)] dark:shadow-[0_12px_48px_rgba(0,0,0,0.4)]"
           style={{ background: "linear-gradient(135deg,#0B1021 0%,#17213A 58%,#102238 100%)" }}
         >
           <div

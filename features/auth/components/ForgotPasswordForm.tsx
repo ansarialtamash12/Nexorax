@@ -29,31 +29,27 @@ export function ForgotPasswordForm() {
 
   // Shared input styles
   const inputBase = cn(
-    "w-full pl-11 pr-4 py-3 text-sm rounded-lg bg-[#0B1726]/80 border text-white placeholder-slate-500 outline-none transition-all duration-200",
-    "focus:border-[#19C8EE]/70 focus:bg-[#102238] focus:ring-2 focus:ring-[#19C8EE]/20"
+    "w-full rounded-lg border bg-bg px-4 py-3 pl-11 pr-4 text-sm text-fg placeholder:text-muted outline-none transition-all duration-200",
+    "focus:border-violet focus:ring-2 focus:ring-violet/20"
   );
 
   return (
     <div
-      className="auth-page relative min-h-screen w-full overflow-hidden"
-      style={{
-        background: "var(--auth-page-background)",
-      }}
+      className="auth-page auth-forgot-page relative min-h-screen w-full overflow-hidden"
     >
-      {/* Purple/blue glow from logo (top center) */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-500/15 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-32 left-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
+      {/* Violet and gold ambient glow */}
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-violet/15 blur-[120px]" />
+      <div className="pointer-events-none absolute left-1/2 top-32 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-gold/10 blur-[100px]" />
 
-      {/* Gold ambient glow (bottom corners) */}
-      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="pointer-events-none absolute bottom-0 left-1/4 h-[500px] w-[500px] rounded-full bg-gold/5 blur-[120px]" />
+      <div className="pointer-events-none absolute bottom-0 right-1/4 h-[400px] w-[400px] rounded-full bg-violet/5 blur-[100px]" />
 
-      {/* Subtle gold grid overlay */}
+      {/* Subtle violet grid overlay */}
       <div
-        className="absolute inset-0 opacity-[0.035] pointer-events-none"
+        className="pointer-events-none absolute inset-0 opacity-[0.035]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(25,200,238,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(25,200,238,0.4) 1px, transparent 1px)",
+            "linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px)",
           backgroundSize: "50px 50px",
         }}
       />
@@ -62,16 +58,14 @@ export function ForgotPasswordForm() {
         <div className="w-full max-w-md">
 
           {/* ═══ Main Card ═══ */}
-          <div className="relative rounded-2xl overflow-hidden border border-[#19C8EE]/20 shadow-[0_0_60px_-15px_rgba(25,200,238,0.3)] backdrop-blur-xl bg-[#081321]/70">
+          <div className="auth-forgot-card relative overflow-hidden rounded-2xl border border-line bg-surface shadow-xl backdrop-blur-xl">
 
-            {/* Gold gradient top bar */}
-            <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-[#10C7F4] to-transparent" />
+            <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-violet to-gold" />
 
-            {/* Corner accents */}
-            <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-[#19C8EE]/40 rounded-tl-2xl pointer-events-none" />
-            <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-[#19C8EE]/40 rounded-tr-2xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-[#19C8EE]/40 rounded-bl-2xl pointer-events-none" />
-            <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-[#19C8EE]/40 rounded-br-2xl pointer-events-none" />
+            <div className="auth-forgot-corner pointer-events-none absolute left-0 top-0 h-16 w-16 rounded-tl-2xl border-l-2 border-t-2" />
+            <div className="auth-forgot-corner pointer-events-none absolute right-0 top-0 h-16 w-16 rounded-tr-2xl border-r-2 border-t-2" />
+            <div className="auth-forgot-corner pointer-events-none absolute bottom-0 left-0 h-16 w-16 rounded-bl-2xl border-b-2 border-l-2" />
+            <div className="auth-forgot-corner pointer-events-none absolute bottom-0 right-0 h-16 w-16 rounded-br-2xl border-b-2 border-r-2" />
 
             <div className="p-6 sm:p-8 md:p-10">
 
@@ -83,34 +77,37 @@ export function ForgotPasswordForm() {
                     alt="NEXORAX"
                     width={192}
                     height={128}
-                    className="h-24 w-auto sm:h-28"
+                    className="h-24 w-auto object-contain dark:hidden sm:h-28"
+                    priority
+                  />
+                  <Image
+                    src="/Nexorax-Purple-and-Gold-Ribbon-Logo.png"
+                    alt="NEXORAX"
+                    width={192}
+                    height={128}
+                    className="hidden h-24 w-auto object-contain dark:block sm:h-28"
+                    priority
                   />
                 </Link>
 
                 {/* "RESET PASSWORD" badge */}
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#19C8EE]/40 bg-[#19C8EE]/5 mb-4">
-                  <Sparkles className="w-3 h-3 text-[#10C7F4]" />
-                  <span className="text-[10px] sm:text-xs font-medium tracking-[0.25em] text-[#10C7F4] uppercase">
+                <div className="auth-forgot-badge mb-4 inline-flex items-center gap-2 rounded-full border px-4 py-1.5">
+                  <Sparkles className="auth-forgot-accent h-3 w-3" />
+                  <span className="auth-forgot-accent text-[10px] font-medium uppercase tracking-[0.25em] sm:text-xs">
                     Recover Account
                   </span>
                 </div>
 
                 {/* Display heading */}
                 <h1
-                  className="text-3xl sm:text-4xl font-bold tracking-wide uppercase"
-                  style={{
-                    fontFamily: "'Cinzel', 'Playfair Display', Georgia, serif",
-                    background: "linear-gradient(180deg, #10C7F4 0%, #19C8EE 60%, #155DF5 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
+                  className="auth-forgot-heading text-3xl font-bold uppercase tracking-wide sm:text-4xl"
+                  style={{ fontFamily: "'Cinzel', 'Playfair Display', Georgia, serif" }}
                 >
                   Forgot Password
                 </h1>
 
                 {/* Subtitle */}
-                <p className="mt-3 text-[10px] sm:text-xs tracking-[0.3em] uppercase text-slate-400">
+                <p className="mt-3 text-[10px] uppercase tracking-[0.3em] text-muted sm:text-xs">
                   Reset your account access
                 </p>
               </div>
@@ -118,20 +115,16 @@ export function ForgotPasswordForm() {
               {isSubmitted ? (
                 // Success state
                 <div className="text-center py-8">
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#10C7F4] to-[#155DF5] flex items-center justify-center shadow-[0_0_25px_rgba(25,200,238,0.4)]">
-                    <ShieldCheck className="w-8 h-8 text-black" />
+                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-violet to-gold shadow-lg">
+                    <ShieldCheck className="h-8 w-8 text-[#1a1033]" />
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-2">Check Your Email</h3>
-                  <p className="text-sm text-slate-400 mb-6">
+                  <h3 className="mb-2 text-xl font-semibold text-fg">Check Your Email</h3>
+                  <p className="mb-6 text-sm text-muted">
                     We&apos;ve sent a password reset link to your email address.
                   </p>
                   <Link
                     href="/login"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm tracking-[0.15em] uppercase transition-all duration-300 text-black"
-                    style={{
-                      background: "linear-gradient(135deg, #10C7F4 0%, #19C8EE 50%, #155DF5 100%)",
-                      boxShadow: "0 0 25px rgba(25,200,238,0.35), inset 0 1px 0 rgba(255,255,255,0.3)",
-                    }}
+                    className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-violet to-gold px-6 py-3 text-sm font-semibold uppercase tracking-[0.15em] text-[#1a1033] shadow-lg transition-opacity hover:opacity-90"
                   >
                     <ArrowLeft className="h-4 w-4" />
                     Back to Login
@@ -143,12 +136,12 @@ export function ForgotPasswordForm() {
                   <form onSubmit={onSubmit} className="space-y-5" autoComplete="off">
 
                     {/* ═══ Account Details Section ═══ */}
-                    <div className="rounded-xl bg-[#0B1726]/60 border border-[#19C8EE]/15 p-5">
+                    <div className="auth-forgot-section rounded-xl border border-line bg-bg2/70 p-5">
                       <div className="flex items-center gap-2.5 mb-4">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#10C7F4] to-[#155DF5] flex items-center justify-center shadow-[0_0_15px_rgba(25,200,238,0.4)]">
-                          <FaUser className="text-black text-xs" />
+                        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet to-gold shadow-sm">
+                          <FaUser className="text-xs text-[#1a1033]" />
                         </div>
-                        <h3 className="text-xs font-semibold tracking-[0.15em] text-[#10C7F4] uppercase">
+                        <h3 className="auth-forgot-accent text-xs font-semibold uppercase tracking-[0.15em]">
                           Account Details
                         </h3>
                       </div>
@@ -156,11 +149,11 @@ export function ForgotPasswordForm() {
                       <div className="space-y-4">
                         {/* UserId */}
                         <div>
-                          <label className="block text-xs font-medium text-slate-300 mb-2">
-                            User ID <span className="text-[#10C7F4]">*</span>
+                          <label className="mb-2 block text-xs font-medium text-soft">
+                            User ID <span className="auth-forgot-accent">*</span>
                           </label>
                           <div className="relative">
-                            <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm" />
+                            <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-muted text-sm" />
                             <input
                               {...form.register("UserId")}
                               type="text"
@@ -170,7 +163,7 @@ export function ForgotPasswordForm() {
                                 inputBase,
                                 form.formState.errors.UserId
                                   ? "border-red-500/60 bg-red-500/5"
-                                  : "border-[#19C8EE]/20"
+                                  : "border-line"
                               )}
                             />
                           </div>
@@ -183,11 +176,11 @@ export function ForgotPasswordForm() {
 
                         {/* Email */}
                         <div>
-                          <label className="block text-xs font-medium text-slate-300 mb-2">
-                            Email Address <span className="text-[#10C7F4]">*</span>
+                          <label className="mb-2 block text-xs font-medium text-soft">
+                            Email Address <span className="auth-forgot-accent">*</span>
                           </label>
                           <div className="relative">
-                            <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm" />
+                            <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-muted text-sm" />
                             <input
                               {...form.register("Email")}
                               type="email"
@@ -197,7 +190,7 @@ export function ForgotPasswordForm() {
                                 inputBase,
                                 form.formState.errors.Email
                                   ? "border-red-500/60 bg-red-500/5"
-                                  : "border-[#19C8EE]/20"
+                                  : "border-line"
                               )}
                             />
                           </div>
@@ -215,14 +208,9 @@ export function ForgotPasswordForm() {
                       type="submit"
                       disabled={forgotPassword.isPending}
                       className={cn(
-                        "relative w-full py-3.5 rounded-lg font-semibold text-sm tracking-[0.15em] uppercase transition-all duration-300 overflow-hidden group",
-                        "text-black",
-                        "disabled:opacity-60 disabled:cursor-not-allowed"
+                        "auth-forgot-submit group relative w-full overflow-hidden rounded-lg py-3.5 text-sm font-semibold uppercase tracking-[0.15em] text-[#1a1033] transition-opacity duration-300 hover:opacity-90",
+                        "disabled:cursor-not-allowed disabled:opacity-60"
                       )}
-                      style={{
-                        background: "linear-gradient(135deg, #10C7F4 0%, #19C8EE 50%, #155DF5 100%)",
-                        boxShadow: "0 0 25px rgba(25,200,238,0.35), inset 0 1px 0 rgba(255,255,255,0.3)",
-                      }}
                     >
                       {/* Shimmer effect */}
                       <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
@@ -249,15 +237,15 @@ export function ForgotPasswordForm() {
               {!isSubmitted && (
                 <div className="mt-6 text-center">
                   <div className="flex items-center justify-center gap-3 mb-4">
-                    <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#19C8EE]/40" />
-                    <span className="text-[10px] tracking-[0.3em] text-slate-500 uppercase">remembered?</span>
-                    <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#19C8EE]/40" />
+                    <div className="h-px w-12 bg-gradient-to-r from-transparent to-violet/40" />
+                    <span className="text-[10px] uppercase tracking-[0.3em] text-muted">remembered?</span>
+                    <div className="h-px w-12 bg-gradient-to-l from-transparent to-gold/40" />
                   </div>
-                  <p className="text-sm text-slate-400">
+                  <p className="text-sm text-muted">
                     Back to{" "}
                     <Link
                       href="/login"
-                      className="font-semibold text-[#10C7F4] hover:text-[#73DDF5] transition-colors"
+                      className="auth-forgot-accent font-semibold transition-colors hover:opacity-75"
                     >
                       Sign In
                     </Link>
@@ -268,8 +256,8 @@ export function ForgotPasswordForm() {
           </div>
 
           {/* Trust footer */}
-          <p className="mt-6 text-center text-[10px] tracking-[0.25em] uppercase text-slate-500 flex items-center justify-center gap-2">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#19C8EE]" />
+          <p className="mt-6 flex items-center justify-center gap-2 text-center text-[10px] uppercase tracking-[0.25em] text-muted">
+            <ShieldCheck className="auth-forgot-accent h-3.5 w-3.5" />
             Secure encrypted access
           </p>
         </div>

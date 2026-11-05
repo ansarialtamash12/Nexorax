@@ -26,29 +26,27 @@ export function LoginForm() {
 
   // Shared input styles
   const inputBase = cn(
-    "w-full pl-11 pr-4 py-3 text-sm rounded-lg bg-[#0B1726]/80 border text-white placeholder-slate-500 outline-none transition-all duration-200",
-    "focus:border-[#19C8EE]/70 focus:bg-[#102238] focus:ring-2 focus:ring-[#19C8EE]/20"
+    "w-full rounded-lg border bg-bg px-4 py-3 pl-11 pr-4 text-sm text-fg placeholder:text-muted outline-none transition-all duration-200",
+    "focus:border-violet focus:ring-2 focus:ring-violet/20"
   );
 
   return (
     <div
-      className="auth-page relative min-h-screen w-full overflow-hidden"
-      style={{ background: "var(--auth-page-background)" }}
+      className="auth-page auth-login-page relative min-h-screen w-full overflow-hidden"
     >
-      {/* Cyan/blue glow from logo (top center) */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-500/15 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-32 left-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
+      {/* Violet and gold ambient glow */}
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-violet/15 blur-[120px]" />
+      <div className="pointer-events-none absolute left-1/2 top-32 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-gold/10 blur-[100px]" />
 
-      {/* Cyan/blue ambient glow (bottom corners) */}
-      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="pointer-events-none absolute bottom-0 left-1/4 h-[500px] w-[500px] rounded-full bg-gold/5 blur-[120px]" />
+      <div className="pointer-events-none absolute bottom-0 right-1/4 h-[400px] w-[400px] rounded-full bg-violet/5 blur-[100px]" />
 
-      {/* Subtle cyan grid overlay */}
+      {/* Subtle violet grid overlay */}
       <div
-        className="absolute inset-0 opacity-[0.035] pointer-events-none"
+        className="pointer-events-none absolute inset-0 opacity-[0.035]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(25,200,238,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(25,200,238,0.4) 1px, transparent 1px)",
+            "linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px)",
           backgroundSize: "50px 50px",
         }}
       />
@@ -57,16 +55,14 @@ export function LoginForm() {
         <div className="w-full max-w-md">
 
           {/* ═══ Main Card ═══ */}
-          <div className="auth-card relative rounded-2xl overflow-hidden border border-[#19C8EE]/20 shadow-[0_0_60px_-15px_rgba(25,200,238,0.3)] backdrop-blur-xl bg-[#081321]/70">
+          <div className="auth-login-card relative overflow-hidden rounded-2xl border border-line bg-surface shadow-xl backdrop-blur-xl">
 
-            {/* Cyan gradient top bar */}
-            <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-[#19C8EE] to-transparent" />
+            <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-violet to-gold" />
 
-            {/* Corner accents */}
-            <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-[#19C8EE]/40 rounded-tl-2xl pointer-events-none" />
-            <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-[#19C8EE]/40 rounded-tr-2xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-[#19C8EE]/40 rounded-bl-2xl pointer-events-none" />
-            <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-[#19C8EE]/40 rounded-br-2xl pointer-events-none" />
+            <div className="auth-login-corner pointer-events-none absolute left-0 top-0 h-16 w-16 rounded-tl-2xl border-l-2 border-t-2" />
+            <div className="auth-login-corner pointer-events-none absolute right-0 top-0 h-16 w-16 rounded-tr-2xl border-r-2 border-t-2" />
+            <div className="auth-login-corner pointer-events-none absolute bottom-0 left-0 h-16 w-16 rounded-bl-2xl border-b-2 border-l-2" />
+            <div className="auth-login-corner pointer-events-none absolute bottom-0 right-0 h-16 w-16 rounded-br-2xl border-b-2 border-r-2" />
 
             <div className="p-6 sm:p-8 md:p-10">
 
@@ -78,35 +74,37 @@ export function LoginForm() {
                     alt="NEXORAX"
                     width={192}
                     height={128}
-                    className="h-24 w-auto sm:h-28"
+                    className="h-24 w-auto object-contain dark:hidden sm:h-28"
+                    priority
+                  />
+                  <Image
+                    src="/Nexorax-Purple-and-Gold-Ribbon-Logo.png"
+                    alt="NEXORAX"
+                    width={192}
+                    height={128}
+                    className="hidden h-24 w-auto object-contain dark:block sm:h-28"
                     priority
                   />
                 </Link>
 
                 {/* "WELCOME BACK" badge — matches landing page style */}
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#19C8EE]/40 bg-[#19C8EE]/5 mb-4">
-                  <Sparkles className="w-3 h-3 text-[#10C7F4]" />
-                  <span className="text-[10px] sm:text-xs font-medium tracking-[0.25em] text-[#10C7F4] uppercase">
+                <div className="auth-login-badge mb-4 inline-flex items-center gap-2 rounded-full border px-4 py-1.5">
+                  <Sparkles className="auth-login-accent h-3 w-3" />
+                  <span className="auth-login-accent text-[10px] font-medium uppercase tracking-[0.25em] sm:text-xs">
                     Welcome back
                   </span>
                 </div>
 
                 {/* Display heading — Cinzel-style font */}
                 <h1
-                  className="text-3xl sm:text-4xl font-bold tracking-wide uppercase"
-                  style={{
-                    fontFamily: "'Cinzel', 'Playfair Display', Georgia, serif",
-                    background: "linear-gradient(180deg, #347DFF 0%, #19C8EE 60%, #155DF5 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
+                  className="auth-login-heading text-3xl font-bold uppercase tracking-wide sm:text-4xl"
+                  style={{ fontFamily: "'Cinzel', 'Playfair Display', Georgia, serif" }}
                 >
                   Sign In
                 </h1>
 
                 {/* Subtitle with wide tracking */}
-                <p className="mt-3 text-[10px] sm:text-xs tracking-[0.3em] uppercase text-slate-400">
+                <p className="mt-3 text-[10px] uppercase tracking-[0.3em] text-muted sm:text-xs">
                   Continue your journey
                 </p>
               </div>
@@ -115,12 +113,12 @@ export function LoginForm() {
                 <form onSubmit={onSubmit} className="space-y-5" autoComplete="off">
 
                   {/* ═══ Credentials Section ═══ */}
-                  <div className="rounded-xl bg-[#0B1726]/60 border border-[#19C8EE]/15 p-5">
+                  <div className="auth-login-section rounded-xl border border-line bg-bg2/70 p-5">
                     <div className="flex items-center gap-2.5 mb-4">
-                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#10C7F4] to-[#155DF5] flex items-center justify-center shadow-[0_0_15px_rgba(25,200,238,0.4)]">
-                        <FaLock className="text-[#06121d] text-xs" />
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet to-gold shadow-sm">
+                        <FaLock className="text-xs text-[#1a1033]" />
                       </div>
-                      <h3 className="text-xs font-semibold tracking-[0.15em] text-[#10C7F4] uppercase">
+                      <h3 className="auth-login-accent text-xs font-semibold uppercase tracking-[0.15em]">
                         Account Access
                       </h3>
                     </div>
@@ -128,11 +126,11 @@ export function LoginForm() {
                     <div className="space-y-4">
                       {/* Username */}
                       <div>
-                        <label className="block text-xs font-medium text-slate-300 mb-2">
-                          Username <span className="text-[#10C7F4]">*</span>
+                        <label className="mb-2 block text-xs font-medium text-soft">
+                          Username <span className="auth-login-accent">*</span>
                         </label>
                         <div className="relative">
-                          <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm" />
+                          <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-muted text-sm" />
                           <input
                             {...form.register("userid")}
                             type="text"
@@ -142,7 +140,7 @@ export function LoginForm() {
                               inputBase,
                               form.formState.errors.userid
                                 ? "border-red-500/60 bg-red-500/5"
-                                : "border-[#19C8EE]/20"
+                                : "border-line"
                             )}
                           />
                         </div>
@@ -156,18 +154,18 @@ export function LoginForm() {
                       {/* Password */}
                       <div>
                         <div className="flex items-center justify-between mb-2">
-                          <label className="block text-xs font-medium text-slate-300">
-                            Password <span className="text-[#10C7F4]">*</span>
+                          <label className="block text-xs font-medium text-soft">
+                            Password <span className="auth-login-accent">*</span>
                           </label>
                           <Link
                             href="/forgot-password"
-                            className="text-[10px] sm:text-xs text-[#10C7F4] hover:text-[#73DDF5] transition-colors tracking-wide"
+                            className="auth-login-accent text-[10px] tracking-wide transition-colors hover:opacity-75 sm:text-xs"
                           >
                             Forgot?
                           </Link>
                         </div>
                         <div className="relative">
-                          <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm" />
+                          <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-muted text-sm" />
                           <input
                             {...form.register("password")}
                             type={showPassword ? "text" : "password"}
@@ -178,13 +176,13 @@ export function LoginForm() {
                               "pr-12",
                               form.formState.errors.password
                                 ? "border-red-500/60 bg-red-500/5"
-                                : "border-[#19C8EE]/20"
+                                : "border-line"
                             )}
                           />
                           <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-[#10C7F4] transition-colors"
+                            className="auth-login-accent absolute right-4 top-1/2 -translate-y-1/2 transition-colors hover:opacity-75"
                             aria-label={showPassword ? "Hide password" : "Show password"}
                           >
                             {showPassword ? <FaEyeSlash size={15} /> : <FaEye size={15} />}
@@ -200,29 +198,29 @@ export function LoginForm() {
                     </div>
                   </div>
 
-                  <div className="rounded-2xl border border-[#19C8EE]/30 bg-[#0B1726]/40 p-2.5 sm:p-3">
-                    <div className="flex min-h-[68px] items-center justify-between gap-3 rounded-xl border border-[#19C8EE]/25 px-3 sm:px-4">
+                  <div className="auth-login-human-check rounded-2xl border p-2.5 sm:p-3">
+                    <div className="flex min-h-[68px] items-center justify-between gap-3 rounded-xl border border-line px-3 sm:px-4">
                       <button
                         type="button"
                         aria-pressed={isHumanCheckChecked}
                         aria-describedby="human-check-disclaimer"
                         onClick={() => setIsHumanCheckChecked((checked) => !checked)}
-                        className="flex min-h-14 min-w-0 flex-1 items-center gap-3 text-left text-sm text-slate-300 transition-colors hover:text-[#10C7F4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#19C8EE] focus-visible:ring-offset-2 focus-visible:ring-offset-[#081321] sm:gap-4 sm:text-base"
+                        className="auth-login-human-label flex min-h-14 min-w-0 flex-1 items-center gap-3 text-left text-sm transition-colors hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet focus-visible:ring-offset-2 focus-visible:ring-offset-bg sm:gap-4 sm:text-base"
                       >
                         <span
                           aria-hidden="true"
                           className={cn(
                             "flex h-6 w-6 shrink-0 items-center justify-center rounded-md border-2 transition-colors",
                             isHumanCheckChecked
-                              ? "border-[#19C8EE] bg-[#19C8EE] text-[#06121d]"
-                              : "border-[#19C8EE]/50"
+                              ? "border-violet bg-gradient-to-br from-violet to-gold text-[#1a1033]"
+                              : "border-violet/50"
                           )}
                         >
                           {isHumanCheckChecked && <Check className="h-4 w-4" strokeWidth={3} />}
                         </span>
                         <span className="truncate">I&apos;m not a robot</span>
                       </button>
-                      <span className="flex shrink-0 items-center gap-1.5 text-xs font-medium text-[#10C7F4] sm:gap-2 sm:text-sm">
+                      <span className="auth-login-accent flex shrink-0 items-center gap-1.5 text-xs font-medium sm:gap-2 sm:text-sm">
                         <ShieldCheck className="h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
                         Privacy
                       </span>
@@ -237,18 +235,10 @@ export function LoginForm() {
                     type="submit"
                     disabled={login.isPending || !isHumanCheckChecked}
                     className={cn(
-                      "relative w-full py-3.5 rounded-lg font-semibold text-sm tracking-[0.15em] uppercase transition-all duration-300 overflow-hidden group",
-                      isHumanCheckChecked ? "text-black" : "text-slate-500",
+                      "auth-login-submit group relative w-full overflow-hidden rounded-lg py-3.5 text-sm font-semibold uppercase tracking-[0.15em] transition-all duration-300",
+                      isHumanCheckChecked ? "auth-login-submit-enabled text-[#1a1033]" : "auth-login-submit-disabled",
                       "disabled:cursor-not-allowed"
                     )}
-                    style={{
-                      background: isHumanCheckChecked
-                        ? "linear-gradient(135deg, #10C7F4 0%, #19C8EE 50%, #155DF5 100%)"
-                        : "#cbd5e1",
-                      boxShadow: isHumanCheckChecked
-                        ? "0 0 25px rgba(25,200,238,0.35), inset 0 1px 0 rgba(255,255,255,0.3)"
-                        : "none",
-                    }}
                   >
                     {/* Shimmer effect */}
                     <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
@@ -273,15 +263,15 @@ export function LoginForm() {
               {/* ═══ Footer ═══ */}
               <div className="mt-6 text-center">
                 <div className="flex items-center justify-center gap-3 mb-4">
-                  <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#19C8EE]/40" />
-                  <span className="text-[10px] tracking-[0.3em] text-slate-500 uppercase">new here?</span>
-                  <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#19C8EE]/40" />
+                  <div className="h-px w-12 bg-gradient-to-r from-transparent to-violet/40" />
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-muted">new here?</span>
+                  <div className="h-px w-12 bg-gradient-to-l from-transparent to-gold/40" />
                 </div>
-                <p className="text-sm text-slate-400">
+                <p className="text-sm text-muted">
                   Don&apos;t have an account?{" "}
                   <Link
                     href="/register"
-                    className="font-semibold text-[#10C7F4] hover:text-[#73DDF5] transition-colors"
+                    className="auth-login-accent font-semibold transition-colors hover:opacity-75"
                   >
                     Create account
                   </Link>
@@ -291,8 +281,8 @@ export function LoginForm() {
           </div>
 
           {/* Trust footer */}
-          <p className="mt-6 text-center text-[10px] tracking-[0.25em] uppercase text-slate-500 flex items-center justify-center gap-2">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#19C8EE]" />
+          <p className="mt-6 flex items-center justify-center gap-2 text-center text-[10px] uppercase tracking-[0.25em] text-muted">
+            <ShieldCheck className="auth-login-accent h-3.5 w-3.5" />
             Secure encrypted access
           </p>
         </div>

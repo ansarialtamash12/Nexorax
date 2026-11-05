@@ -162,40 +162,37 @@ export function RegistrationForm() {
         : "bg-emerald-500";
 
   const inputBase = cn(
-    "w-full pl-11 pr-4 py-3 text-sm rounded-lg bg-[#0B1726]/80 border text-white placeholder-slate-500 outline-none transition-all duration-200",
-    "focus:border-[#19C8EE]/70 focus:bg-[#102238] focus:ring-2 focus:ring-[#19C8EE]/20"
+    "w-full rounded-lg border border-line bg-bg px-4 py-3 pl-11 pr-4 text-sm text-fg placeholder:text-muted outline-none transition-all duration-200",
+    "focus:border-violet focus:ring-2 focus:ring-violet/20"
   );
 
   return (
     <div
-      className="auth-page relative min-h-screen w-full overflow-hidden"
-      style={{
-        background: "var(--auth-page-background)",
-      }}
+      className="auth-page auth-register-page relative min-h-screen w-full overflow-hidden"
     >
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-500/15 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-32 left-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-violet/15 blur-[120px]" />
+      <div className="pointer-events-none absolute left-1/2 top-32 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-gold/10 blur-[100px]" />
+      <div className="pointer-events-none absolute bottom-0 left-1/4 h-[500px] w-[500px] rounded-full bg-gold/5 blur-[120px]" />
+      <div className="pointer-events-none absolute bottom-0 right-1/4 h-[400px] w-[400px] rounded-full bg-violet/5 blur-[100px]" />
 
       <div
-        className="absolute inset-0 opacity-[0.035] pointer-events-none"
+        className="pointer-events-none absolute inset-0 opacity-[0.035]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(25,200,238,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(25,200,238,0.4) 1px, transparent 1px)",
+            "linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px)",
           backgroundSize: "50px 50px",
         }}
       />
 
       <div className="relative z-10 flex items-center justify-center min-h-screen px-4 py-10">
         <div className="w-full max-w-2xl">
-          <div className="relative rounded-2xl overflow-hidden border border-[#19C8EE]/20 shadow-[0_0_60px_-15px_rgba(25,200,238,0.3)] backdrop-blur-xl bg-[#081321]/70">
-            <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-[#10C7F4] to-transparent" />
+          <div className="auth-register-card relative overflow-hidden rounded-2xl border border-line bg-surface shadow-xl backdrop-blur-xl">
+            <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-violet to-gold" />
 
-            <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-[#19C8EE]/40 rounded-tl-2xl pointer-events-none" />
-            <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-[#19C8EE]/40 rounded-tr-2xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-[#19C8EE]/40 rounded-bl-2xl pointer-events-none" />
-            <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-[#19C8EE]/40 rounded-br-2xl pointer-events-none" />
+            <div className="auth-register-corner pointer-events-none absolute left-0 top-0 h-16 w-16 rounded-tl-2xl border-l-2 border-t-2" />
+            <div className="auth-register-corner pointer-events-none absolute right-0 top-0 h-16 w-16 rounded-tr-2xl border-r-2 border-t-2" />
+            <div className="auth-register-corner pointer-events-none absolute bottom-0 left-0 h-16 w-16 rounded-bl-2xl border-b-2 border-l-2" />
+            <div className="auth-register-corner pointer-events-none absolute bottom-0 right-0 h-16 w-16 rounded-br-2xl border-b-2 border-r-2" />
 
             <div className="p-6 sm:p-8 md:p-10">
               <div className="flex flex-col items-center text-center mb-8">
@@ -205,7 +202,16 @@ export function RegistrationForm() {
                     alt="NEXORAX"
                     width={192}
                     height={128}
-                    className="h-24 w-auto sm:h-28"
+                    className="h-24 w-auto object-contain dark:hidden sm:h-28"
+                    priority
+                  />
+                  <Image
+                    src="/Nexorax-Purple-and-Gold-Ribbon-Logo.png"
+                    alt="NEXORAX"
+                    width={192}
+                    height={128}
+                    className="hidden h-24 w-auto object-contain dark:block sm:h-28"
+                    priority
                   />
                 </Link>
 
@@ -217,15 +223,8 @@ export function RegistrationForm() {
                 </div>
 
                 <h1
-                  className="text-3xl sm:text-4xl font-bold tracking-wide uppercase"
-                  style={{
-                    fontFamily: "'Cinzel', 'Playfair Display', Georgia, serif",
-                    background:
-                      "linear-gradient(180deg, #10C7F4 0%, #19C8EE 60%, #155DF5 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
+                  className="auth-register-heading text-3xl font-bold uppercase tracking-wide sm:text-4xl"
+                  style={{ fontFamily: "'Cinzel', 'Playfair Display', Georgia, serif" }}
                 >
                   Create Account
                 </h1>
@@ -244,7 +243,7 @@ export function RegistrationForm() {
                   {/* ─── Referral & Placement Section ─── */}
                   <div className="referral-placement rounded-xl bg-gradient-to-br from-[#0B1726]/80 to-[#081321]/80 border border-[#19C8EE]/20 p-6 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-[#19C8EE]/5 rounded-full blur-3xl pointer-events-none" />
-                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-cyan-500/5 rounded-full blur-2xl pointer-events-none" />
+                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-gold/5 rounded-full blur-2xl pointer-events-none" />
 
                     <div className="relative z-10">
                       <div className="flex items-center gap-3 mb-5">
@@ -539,12 +538,10 @@ export function RegistrationForm() {
                                 );
                             }}
                             className={cn(
-                              "w-full pl-11 pr-4 py-3 text-sm rounded-lg bg-[#0B1726]/80 border text-white outline-none transition-all appearance-none cursor-pointer",
-                              "focus:border-[#19C8EE]/70 focus:bg-[#102238] focus:ring-2 focus:ring-[#19C8EE]/20",
-                              "[&>option]:bg-[#0B1726] [&>option]:text-white",
+                              "w-full appearance-none rounded-lg border border-line bg-bg py-3 pl-11 pr-4 text-sm text-fg outline-none transition-all focus:border-violet focus:ring-2 focus:ring-violet/20",
                               form.formState.errors.countryId
                                 ? "border-red-500/60 bg-red-500/5"
-                                : "border-[#19C8EE]/20"
+                                : ""
                             )}
                           >
                             <option value="">
@@ -575,7 +572,7 @@ export function RegistrationForm() {
                           {...form.register("countryCode")}
                           readOnly
                           placeholder="+91"
-                          className="w-full px-4 py-3 text-sm rounded-lg bg-[#0B1726]/40 border border-[#19C8EE]/10 text-[#10C7F4] placeholder-slate-600 outline-none cursor-not-allowed font-medium"
+                          className="w-full cursor-not-allowed rounded-lg border border-line bg-bg2 px-4 py-3 text-sm font-medium text-violet outline-none placeholder:text-muted"
                         />
                       </div>
                     </div>
@@ -664,7 +661,7 @@ export function RegistrationForm() {
                       {...form.register("termsAccepted")}
                       type="checkbox"
                       id="termsAccepted"
-                      className="mt-0.5 w-4 h-4 rounded border-[#19C8EE]/30 bg-[#0B1726] text-[#19C8EE] focus:ring-[#19C8EE]/40 focus:ring-offset-0 focus:ring-offset-transparent cursor-pointer accent-[#19C8EE]"
+                      className="mt-0.5 h-4 w-4 cursor-pointer rounded border-violet/30 bg-bg text-violet accent-violet focus:ring-violet/40 focus:ring-offset-0 focus:ring-offset-transparent"
                     />
                     <label
                       htmlFor="termsAccepted"
@@ -701,16 +698,9 @@ export function RegistrationForm() {
                     type="submit"
                     disabled={registration.isPending}
                     className={cn(
-                      "relative w-full py-3.5 rounded-lg font-semibold text-sm tracking-[0.15em] uppercase transition-all duration-300 overflow-hidden group",
-                      "text-black",
+                      "auth-register-submit group relative w-full overflow-hidden rounded-lg py-3.5 text-sm font-semibold uppercase tracking-[0.15em] text-[#1a1033] transition-opacity duration-300 hover:opacity-90",
                       "disabled:opacity-60 disabled:cursor-not-allowed"
                     )}
-                    style={{
-                      background:
-                        "linear-gradient(135deg, #10C7F4 0%, #19C8EE 50%, #155DF5 100%)",
-                      boxShadow:
-                        "0 0 25px rgba(25,200,238,0.35), inset 0 1px 0 rgba(255,255,255,0.3)",
-                    }}
                   >
                     <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
 

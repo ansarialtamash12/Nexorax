@@ -1,136 +1,280 @@
 "use client";
 
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useTheme } from "next-themes";
 
-export function Banner() {
-  const { theme } = useTheme();
-  const isDark = theme !== "light";
+type TradingViewWidgetProps = {
+  scriptName: string;
+  config: Record<string, unknown>;
+  className?: string;
+};
+
+function TradingViewWidget({
+  scriptName,
+  config,
+  className,
+}: TradingViewWidgetProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    container.replaceChildren();
+
+    const widget = document.createElement("div");
+    widget.className = "tradingview-widget-container__widget";
+    widget.style.height = "100%";
+    widget.style.width = "100%";
+
+    const script = document.createElement("script");
+    script.src = `https://s3.tradingview.com/external-embedding/embed-widget-${scriptName}.js`;
+    script.async = true;
+    script.type = "text/javascript";
+    script.textContent = JSON.stringify(config);
+
+    container.append(widget, script);
+
+    return () => {
+      container.replaceChildren();
+    };
+  }, [config, scriptName]);
 
   return (
     <div
-      className="relative mb-4 flex min-h-[380px] items-center overflow-hidden rounded-3xl border border-cyan-400/30 p-6 sm:p-10 lg:p-14"
-      style={{
-        borderColor: isDark
-          ? "rgba(25, 200, 238, 0.35)"
-          : "rgba(25, 200, 238, 0.45)",
-      }}
-    >
-      <Image
-        src="/images/academy-learning-illustration.svg"
-        alt=""
-        fill
-        priority
-        sizes="(max-width: 1024px) 100vw, 80vw"
-        className="object-cover"
-        aria-hidden="true"
-      />
-      <div
-        className={`absolute inset-0 ${
-          isDark
-            ? "bg-gradient-to-r from-[#06111f]/95 via-[#06111f]/80 to-[#06111f]/35"
-            : "bg-gradient-to-r from-[#06111f]/90 via-[#06111f]/75 to-[#06111f]/30"
-        }`}
-      />
+      ref={containerRef}
+      className={`tradingview-widget-container ${className ?? ""}`}
+    />
+  );
+}
 
-      <div className="pointer-events-none absolute right-[4%] top-1/2 hidden aspect-square w-[min(42vw,460px)] -translate-y-1/2 md:block">
-        <div className="dashboard-banner-orbit absolute inset-0 rounded-full border-2 border-dashed border-cyan-300/60" />
-        <div className="absolute inset-[8%] flex items-center justify-center rounded-full bg-cyan-300/5">
-          <div className="w-[82%] rounded-2xl border border-cyan-300/50 bg-[#071B2B]/95 p-3 shadow-[0_20px_50px_rgba(0,0,0,0.4)] sm:rounded-3xl sm:p-5">
-            <div className="mb-3 flex items-center justify-between gap-2 sm:mb-4">
-              <span className="text-[9px] font-bold uppercase tracking-[0.16em] text-cyan-200 sm:text-xs">
-                Market analysis
-              </span>
-              <span className="flex items-center gap-1.5 text-[8px] font-medium uppercase tracking-wide text-slate-300 sm:text-[10px]">
-                <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
-                Price action
-              </span>
-            </div>
-            <svg
-              viewBox="0 0 320 180"
-              className="h-auto w-full"
-              role="img"
-              aria-label="Illustrative trading chart with a rising price trend"
-            >
-              <defs>
-                <linearGradient id="dashboard-chart-line" x1="20" y1="150" x2="300" y2="30" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#347DFF" />
-                  <stop offset=".55" stopColor="#19C8EE" />
-                  <stop offset="1" stopColor="#8AEAFF" />
-                </linearGradient>
-                <linearGradient id="dashboard-chart-fill" x1="160" y1="30" x2="160" y2="160" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#19C8EE" stopOpacity=".24" />
-                  <stop offset="1" stopColor="#19C8EE" stopOpacity="0" />
-                </linearGradient>
-              </defs>
-              <path d="M24 24H296M24 68H296M24 112H296M24 156H296M70 18V156M116 18V156M162 18V156M208 18V156M254 18V156" stroke="#9CC8E8" strokeOpacity=".16" />
-              <path d="m24 132 42-28 38 12 38-42 38 16 42-48 38 18 36-32v128H24V132Z" fill="url(#dashboard-chart-fill)" />
-              <path d="m24 132 42-28 38 12 38-42 38 16 42-48 38 18 36-32" stroke="url(#dashboard-chart-line)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
-              <circle cx="296" cy="28" r="5" fill="#8AEAFF" />
-            </svg>
-            <div className="mt-2 flex items-center justify-between text-[8px] font-medium tracking-wide text-slate-400 sm:mt-3 sm:text-[10px]">
-              <span>Market structure</span>
-              <span>Trend analysis</span>
-            </div>
-          </div>
+const chartSymbols = {
+  BTC: "BINANCE:BTCUSDT",
+  ETH: "BINANCE:ETHUSDT",
+  BNB: "BINANCE:BNBUSDT",
+  SOL: "BINANCE:SOLUSDT",
+  XRP: "BINANCE:XRPUSDT",
+  ADA: "BINANCE:ADAUSDT",
+} as const;
+
+const marketCards = [
+  { symbol: "BTC", name: "Bitcoin" },
+  { symbol: "ETH", name: "Ethereum" },
+  { symbol: "BNB", name: "BNB" },
+] as const;
+
+function LivePriceCard({
+  symbol,
+  name,
+}: {
+  symbol: keyof typeof chartSymbols;
+  name: string;
+}) {
+  const config = useMemo(
+    () => ({
+      symbol: chartSymbols[symbol],
+      width: "100%",
+      height: "100%",
+      locale: "en",
+      dateRange: "1D",
+      colorTheme: "dark",
+      isTransparent: true,
+      autosize: true,
+    }),
+    [symbol],
+  );
+
+  return (
+    <div
+      className="min-w-0 overflow-hidden rounded-xl border border-violet-400/25 bg-[#100b25]/95 p-1.5 sm:p-2"
+      aria-label={`${name} live price chart`}
+    >
+      <TradingViewWidget
+        scriptName="mini-symbol-overview"
+        config={config}
+        className="h-[68px] w-full sm:h-[76px] lg:h-full lg:min-h-0"
+      />
+    </div>
+  );
+}
+
+export function Banner() {
+  const [selectedSymbol, setSelectedSymbol] =
+    useState<keyof typeof chartSymbols>("BTC");
+  const chartConfig = useMemo(
+    () => ({
+      autosize: true,
+      symbol: chartSymbols[selectedSymbol],
+      interval: "15",
+      timezone: "Etc/UTC",
+      theme: "dark",
+      style: "1",
+      locale: "en",
+      allow_symbol_change: false,
+      hide_top_toolbar: true,
+      hide_legend: true,
+      hide_side_toolbar: true,
+      hide_volume: true,
+      withdateranges: false,
+      save_image: false,
+      calendar: false,
+      support_host: "https://www.tradingview.com",
+    }),
+    [selectedSymbol],
+  );
+
+  return (
+    <section className="mb-6 space-y-5">
+      <div className="relative aspect-[1365/768] overflow-hidden rounded-3xl">
+        <Image
+          src="/images/dashboard-hero-banner.png"
+          alt="Nexorax Academy and Trading Hub: learn trading, trade the markets, and exchange P2P."
+          fill
+          priority
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1280px"
+        />
+        <div
+          aria-label={`Live ${selectedSymbol}/USDT TradingView candlestick chart`}
+          className="absolute left-[46.7%] top-[21.2%] z-[1] hidden h-[41%] w-[29.8%] overflow-hidden lg:block"
+          style={{
+            clipPath: "polygon(10% 16%, 100% 0, 90% 91%, 0 100%)",
+          }}
+        >
+          <TradingViewWidget
+            scriptName="advanced-chart"
+            config={chartConfig}
+            className="h-full w-full"
+          />
         </div>
-        <div className="absolute -right-2 top-[12%] z-10 w-[142px] overflow-hidden rounded-xl border-2 border-cyan-300/70 bg-[#071B2B]/95 px-3 py-2.5 text-center shadow-xl sm:-right-3 sm:w-[158px] sm:py-3">
-          <span className="mb-1.5 block text-[8px] font-bold uppercase tracking-[0.15em] text-cyan-200 sm:text-[9px]">
-            NEXORAX Academy
-          </span>
-          <div className="dashboard-banner-topic-window h-5 overflow-hidden text-[11px] font-semibold text-white sm:text-xs">
-            <div className="dashboard-banner-topic-ticker">
-              <span>Forex foundations</span>
-              <span>Chart reading</span>
-              <span>Risk management</span>
-              <span>Market analysis</span>
-              <span>Forex foundations</span>
-            </div>
-          </div>
+        <div
+          role="group"
+          aria-label="Select chart market"
+          className="absolute left-[57.5%] top-[29.5%] z-[2] hidden h-[5.2%] w-[16.7%] grid-cols-6 items-center gap-[1%] rounded-full border border-violet-300/25 bg-[#100b25]/95 p-[0.3%] lg:grid"
+        >
+          {(Object.keys(chartSymbols) as Array<keyof typeof chartSymbols>).map(
+            (symbol) => (
+              <button
+                key={symbol}
+                type="button"
+                aria-label={`Show ${symbol}/USDT chart`}
+                aria-pressed={selectedSymbol === symbol}
+                onClick={() => setSelectedSymbol(symbol)}
+                className={`flex h-full min-w-0 items-center justify-center rounded-full text-[clamp(5px,0.55vw,8px)] font-bold leading-none transition ${
+                  selectedSymbol === symbol
+                    ? "bg-violet-600 text-white"
+                    : "text-slate-200 hover:bg-white/15"
+                }`}
+              >
+                {symbol}
+              </button>
+            ),
+          )}
+        </div>
+        <div
+          role="group"
+          aria-label="Live BTC, ETH, and BNB prices"
+          className="absolute left-[47.4%] top-[65.1%] hidden h-[13.2%] w-[49.5%] grid-cols-3 gap-[1.2%] lg:grid"
+        >
+          {marketCards.map((market) => (
+            <LivePriceCard
+              key={market.symbol}
+              symbol={market.symbol}
+              name={market.name}
+            />
+          ))}
         </div>
         <Link
           href="/ai-business-hub"
-          className="pointer-events-auto absolute -bottom-1 left-0 flex min-h-[68px] w-[132px] items-center justify-center rounded-xl border-2 border-cyan-300/70 bg-[#071B2B]/95 px-3 py-2 text-center text-sm font-bold text-cyan-200 shadow-xl transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 sm:-left-3 sm:w-[148px] sm:text-base"
+          aria-label="Fund Business Dashboard"
+          className="absolute left-[3.96%] top-[71%] flex h-[7.55%] w-[16.48%] items-center justify-center gap-1 rounded-full bg-gradient-to-r from-violet-600 to-amber-400 px-1 text-center text-[clamp(7px,0.82vw,12px)] font-bold leading-tight text-white shadow-lg transition hover:brightness-110 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-violet-400 sm:px-2"
         >
-          IB Portal
+          <span className="sm:hidden">Fund</span>
+          <span className="hidden whitespace-nowrap sm:inline">
+            Business Dashboard
+          </span>
+          <span aria-hidden="true">→</span>
+        </Link>
+        <Link
+          href="/academy"
+          aria-label="Explore the Academy"
+          className="absolute left-[21.9%] top-[71%] hidden h-[7.2%] w-[17.3%] rounded-full focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-violet-400 lg:block"
+        />
+      </div>
+
+      <div className="flex flex-wrap gap-3 lg:hidden">
+        <Link
+          href="/ai-business-hub"
+          className="inline-flex min-h-11 items-center justify-center rounded-full bg-gradient-to-r from-violet-600 to-amber-400 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-violet-500/20 transition hover:brightness-110"
+        >
+          Fund Business Dashboard
+        </Link>
+        <Link
+          href="/academy"
+          className="inline-flex min-h-11 items-center justify-center rounded-full border border-violet-300 px-6 py-3 text-sm font-semibold text-violet-700 transition hover:bg-violet-50 dark:border-violet-400/50 dark:text-violet-200 dark:hover:bg-violet-400/10"
+        >
+          Explore Academy
         </Link>
       </div>
 
-      <div className="relative z-20 max-w-xl text-white md:max-w-[54%]">
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-200/35 bg-cyan-300/10 px-3.5 py-2 text-[10px] font-semibold tracking-[0.16em] text-[#9BEAF8] sm:text-xs">
-          <span className="h-2 w-2 rounded-full bg-[#10C7F4]" />
-          NEXORAX ACADEMY
-        </div>
-
-        <h1
-          className="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl"
-          style={{ fontFamily: '"Space Grotesk", sans-serif' }}
-        >
-          Build your knowledge.
-          <span className="block bg-gradient-to-r from-[#73DDF5] via-[#19C8EE] to-[#347DFF] bg-clip-text text-transparent">
-            Trade with confidence.
-          </span>
-        </h1>
-
-        <p className="mt-4 max-w-lg text-sm leading-7 text-slate-200 sm:text-base">
-          Learn the markets step by step with practical lessons designed to
-          help you make more informed decisions.
-        </p>
-
-        <div className="mt-7 flex flex-wrap items-center gap-4">
-          <Link
-            href="/academy"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#19C8EE] to-[#347DFF] px-5 py-3 text-sm font-semibold text-[#06111f] shadow-lg shadow-cyan-950/30 transition-transform hover:scale-[1.03]"
-          >
-            Explore Academy
-            <span aria-hidden="true">→</span>
-          </Link>
-          <p className="text-xs font-medium tracking-wide text-slate-300 sm:text-sm">
-            Learn at your pace · Grow your skills
-          </p>
-        </div>
+      <div
+        role="group"
+        aria-label="Live BTC, ETH, and BNB prices"
+        className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:hidden"
+      >
+        {marketCards.map((market) => (
+          <LivePriceCard
+            key={market.symbol}
+            symbol={market.symbol}
+            name={market.name}
+          />
+        ))}
       </div>
-    </div>
+
+      <section
+        aria-labelledby="dashboard-live-chart-title"
+        className="overflow-hidden rounded-2xl border border-violet-400/25 bg-[#100b25] p-4 lg:hidden"
+      >
+        <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2
+              id="dashboard-live-chart-title"
+              className="text-base font-bold text-white"
+            >
+              Live {selectedSymbol}/USDT Chart
+            </h2>
+            <p className="mt-1 text-xs text-slate-300">
+              Real-time TradingView market chart
+            </p>
+          </div>
+          <div aria-label="Select chart market" className="flex gap-1">
+            {(Object.keys(chartSymbols) as Array<keyof typeof chartSymbols>).map(
+              (symbol) => (
+                <button
+                  key={symbol}
+                  type="button"
+                  aria-pressed={selectedSymbol === symbol}
+                  onClick={() => setSelectedSymbol(symbol)}
+                  className={`min-h-9 rounded-md px-3 text-sm font-semibold transition ${
+                    selectedSymbol === symbol
+                      ? "bg-violet-600 text-white"
+                      : "bg-white/10 text-slate-200 hover:bg-white/20"
+                  }`}
+                >
+                  {symbol}
+                </button>
+              ),
+            )}
+          </div>
+        </div>
+        <TradingViewWidget
+          scriptName="advanced-chart"
+          config={chartConfig}
+          className="h-[320px] w-full sm:h-[400px]"
+        />
+      </section>
+
+    </section>
   );
 }

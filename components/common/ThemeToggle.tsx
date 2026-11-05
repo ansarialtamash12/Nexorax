@@ -25,7 +25,7 @@ export function ThemeToggle({ className = "" }: ThemeToggleProps) {
       aria-label={`Switch to ${nextTheme} mode`}
       title={`Switch to ${nextTheme} mode`}
       onClick={() => setTheme(nextTheme)}
-      className={`inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 bg-white/90 text-slate-700 shadow-sm transition-colors hover:bg-slate-100 dark:border-white/15 dark:bg-white/5 dark:text-cyan-300 dark:hover:bg-white/10 ${className}`}
+      className={`inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface text-fg shadow-sm transition-colors hover:border-gold ${className}`}
     >
       {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
     </button>
