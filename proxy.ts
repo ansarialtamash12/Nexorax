@@ -138,6 +138,14 @@ export function proxy(request: NextRequest) {
     request.cookies.get(SESSION_COOKIE_NAME)?.value,
   );
 
+  if (pathname === "/" && hasSession) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+
+  if (pathname.replace(/\/+$/, "") === "/dashboard" && !hasSession) {
+    return NextResponse.next();
+  }
+
   if (isPathMatch(pathname, PROTECTED_PATHS) && !hasSession) {
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("from", pathname);
@@ -153,6 +161,7 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
+    "/",
     "/spr-admin/:path*",
     "/academy/:path*",
     "/ai-business-hub/:path*",

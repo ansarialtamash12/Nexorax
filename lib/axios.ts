@@ -12,6 +12,7 @@ httpClient.interceptors.response.use(
     if (axios.isAxiosError(error) && error.response?.status === 401) {
       if (
         typeof window !== "undefined" &&
+        window.location.pathname !== "/dashboard" &&
         !window.location.pathname.includes("/login")
       ) {
         const { useAuthStore } = await import("@/store/auth.store");
