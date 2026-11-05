@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 420" fill="none">
+  <defs>
+    <linearGradient id="screen" x1="128" y1="95" x2="387" y2="265" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#123657"/>
+      <stop offset="1" stop-color="#091A2D"/>
+    </linearGradient>
+    <linearGradient id="line" x1="158" y1="235" x2="367" y2="126" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#347DFF"/>
+      <stop offset=".55" stop-color="#19C8EE"/>
+      <stop offset="1" stop-color="#8AEAFF"/>
+    </linearGradient>
+    <linearGradient id="book" x1="182" y1="314" x2="354" y2="370" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#16416A"/>
+      <stop offset="1" stop-color="#0B2037"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="matrix(0 185 -185 0 274 198)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#19C8EE" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#19C8EE" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="274" cy="198" r="185" fill="url(#glow)"/>
+  <circle cx="400" cy="110" r="47" fill="#19C8EE" fill-opacity=".08" stroke="#73DDF5" stroke-opacity=".35"/>
+  <path d="M383 110h34m-17-17v34" stroke="#73DDF5" stroke-linecap="round" stroke-opacity=".8" stroke-width="3"/>
+  <path d="M135 82h250a17 17 0 0 1 17 17v164H118V99a17 17 0 0 1 17-17Z" fill="#07111F" stroke="#19C8EE" stroke-opacity=".65" stroke-width="3"/>
+  <path d="M137 101h246v142H137V101Z" fill="url(#screen)"/>
+  <g stroke="#B6E9F7" stroke-opacity=".15">
+    <path d="M153 132h214M153 165h214M153 198h214"/>
+    <path d="M190 115v116m46-116v116m47-116v116m47-116v116"/>
+  </g>
+  <path d="m153 211 37-29 34 8 39-48 35 14 35-37 34 17" stroke="url(#line)" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+  <circle cx="153" cy="211" r="5" fill="#73DDF5"/>
+  <circle cx="367" cy="136" r="5" fill="#73DDF5"/>
+  <path d="m102 264 174 25 174-25-174-25-174 25Z" fill="#123657" stroke="#19C8EE" stroke-opacity=".65" stroke-width="3"/>
+  <path d="m102 264 174 25v64l-174-28v-61Z" fill="url(#book)" stroke="#19C8EE" stroke-opacity=".5" stroke-width="3"/>
+  <path d="m450 264-174 25v64l174-28v-61Z" fill="#0B2037" stroke="#19C8EE" stroke-opacity=".5" stroke-width="3"/>
+  <g stroke="#9CC8E8" stroke-linecap="round" stroke-opacity=".7" stroke-width="3">
+    <path d="m136 277 105 15m-105 12 105 15m51-42 105-15m-105 42 105-15"/>
+  </g>
+  <circle cx="416" cy="318" r="23" fill="#0D2742" stroke="#19C8EE" stroke-opacity=".7" stroke-width="2"/>
+  <path d="m406 318 7 7 14-15" stroke="#65E7F5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+  <path d="m99 118 16-13 17 13-17 13-16-13Z" fill="#19C8EE" fill-opacity=".2" stroke="#73DDF5" stroke-opacity=".7" stroke-width="2"/>
+</svg>

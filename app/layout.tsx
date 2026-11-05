@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
+import { Toaster } from "sonner";
+import { Providers } from "@/providers/Providers";
 import "./globals.css";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
@@ -29,7 +31,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
       </head>
-      <body className={`${manrope.variable} bg-bg text-fg antialiased`}>{children}</body>
+      <body className={`${manrope.variable} bg-bg text-fg antialiased`}>
+        <Providers>{children}</Providers>
+        <Toaster position="top-right" />
+      </body>
     </html>
   );
 }

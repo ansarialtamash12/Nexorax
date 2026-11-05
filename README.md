@@ -1,12 +1,17 @@
-# NEXORAX homepage
+# NEXORAX
 
 Next.js (App Router), TypeScript, Tailwind CSS 4, Framer Motion, Recharts, Lucide.
 
 ```bash
 npm install
-npm run dev     # http://localhost:3000
-npm run build   # production build
+npm run dev
+npm run build
 ```
+
+The marketing homepage is at `/`. The migrated user portal includes `/login`,
+`/register`, and the protected dashboard routes (for example, `/dashboard`).
+Set the backend and authentication values from `.env.example` before using
+login, registration, or server-backed dashboard features.
 
 ## Notes
 - Light theme is the default. The sun/moon button in the navbar switches to dark mode and remembers the choice. Colors live as CSS variables in `app/globals.css`.

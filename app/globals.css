@@ -2,6 +2,17 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
+  --background: 260 60% 99%;
+  --foreground: 263 54% 13%;
+  --muted: 260 60% 97%;
+  --muted-foreground: 263 20% 38%;
+  --border: 263 35% 89%;
+  --primary: 263 70% 58%;
+  --primary-foreground: 0 0% 100%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 100%;
+  --radius: 0.5rem;
+  --auth-page-background: radial-gradient(ellipse at top, #102540 0%, #081321 45%, #050a12 100%);
   --bg: #faf8ff;
   --bg2: #f0ebfc;
   --fg: #1a1033;
@@ -17,6 +28,16 @@
   color-scheme: light;
 }
 .dark {
+  --background: 270 43% 4%;
+  --foreground: 0 0% 98%;
+  --muted: 263 50% 12%;
+  --muted-foreground: 263 18% 68%;
+  --border: 263 28% 20%;
+  --primary: 263 80% 68%;
+  --primary-foreground: 270 43% 4%;
+  --destructive: 0 63% 55%;
+  --destructive-foreground: 0 0% 98%;
+  --auth-page-background: radial-gradient(ellipse at top, #102540 0%, #081321 45%, #050a12 100%);
   --bg: #07040f;
   --bg2: #120a2a;
   --fg: #ffffff;
@@ -33,6 +54,15 @@
 }
 
 @theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-border: hsl(var(--border));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
   --color-bg: var(--bg);
   --color-bg2: var(--bg2);
   --color-fg: var(--fg);
@@ -71,6 +101,400 @@ body { overflow-x: hidden; font-family: var(--font-manrope), system-ui, sans-ser
 @keyframes bob { 50% { transform: translateY(-9px); } }
 .candle-bob { animation: bob 4.5s ease-in-out infinite; }
 
+@keyframes hero-academy-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+@keyframes hero-network-rotate { to { transform: rotate(360deg); } }
+@keyframes hero-network-pulse {
+  0%, 100% { opacity: 0.55; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+@keyframes dashboard-banner-topic-ticker {
+  0%, 8% { transform: translateY(0); }
+  25%, 33% { transform: translateY(-20%); }
+  50%, 58% { transform: translateY(-40%); }
+  75%, 83% { transform: translateY(-60%); }
+  100% { transform: translateY(-80%); }
+}
+.dashboard-banner-topic-ticker {
+  display: flex;
+  flex-direction: column;
+  animation: dashboard-banner-topic-ticker 16s ease-in-out infinite;
+}
+.dashboard-banner-topic-ticker span { height: 20px; line-height: 20px; }
+.hero-academy-art { animation: hero-academy-float 6s ease-in-out infinite; }
+.hero-network-orbit, .hero-art-orbit {
+  animation: hero-network-rotate 48s linear infinite;
+  transform-origin: center;
+}
+.dashboard-banner-orbit {
+  animation: hero-network-rotate 32s linear infinite;
+  transform-origin: center;
+}
+.hero-network-node {
+  animation: hero-network-pulse 3s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.hero-network-node-delay { animation-delay: 0.8s; }
+.hero-network-node-delay-2 { animation-delay: 1.6s; }
+
+.portal-shell {
+  --portal-accent: #7c3aed;
+  --portal-accent-soft: rgb(124 58 237 / 10%);
+  --portal-accent-border: rgb(124 58 237 / 30%);
+  --portal-gold: #d6a84f;
+  --portal-gold-soft: rgb(214 168 79 / 14%);
+  --portal-gold-border: rgb(214 168 79 / 35%);
+}
+
+.dark .portal-shell {
+  --portal-accent: #a78bfa;
+  --portal-accent-soft: rgb(139 92 246 / 16%);
+  --portal-accent-border: rgb(167 139 250 / 36%);
+  --portal-gold: #e4bd70;
+  --portal-gold-soft: rgb(214 168 79 / 16%);
+  --portal-gold-border: rgb(214 168 79 / 38%);
+}
+
+.portal-shell [class*="text-cyan-"]:not([class*="hover:text-"]),
+.portal-shell [class*="text-blue-"]:not([class*="hover:text-"]),
+.portal-shell [class*="text-sky-"]:not([class*="hover:text-"]),
+.portal-shell [class*="text-indigo-"]:not([class*="hover:text-"]),
+.portal-shell [class*="text-violet-"]:not([class*="hover:text-"]),
+.portal-shell [class*="text-purple-"]:not([class*="hover:text-"]),
+.portal-shell [class*="text-[#10C7F4]"]:not([class*="hover:text-"]),
+.portal-shell [class*="text-[#19C8EE]"]:not([class*="hover:text-"]),
+.portal-shell [class*="text-[#155DF5]"]:not([class*="hover:text-"]),
+.portal-shell [class*="text-[#347DFF]"]:not([class*="hover:text-"]) {
+  color: var(--portal-accent) !important;
+}
+
+.portal-shell [class*="hover:text-cyan-"]:hover,
+.portal-shell [class*="hover:text-blue-"]:hover,
+.portal-shell [class*="hover:text-sky-"]:hover,
+.portal-shell [class*="hover:text-indigo-"]:hover,
+.portal-shell [class*="hover:text-violet-"]:hover,
+.portal-shell [class*="hover:text-purple-"]:hover,
+.portal-shell [class*="hover:text-[#10C7F4]"]:hover,
+.portal-shell [class*="hover:text-[#19C8EE]"]:hover,
+.portal-shell [class*="hover:text-[#155DF5]"]:hover {
+  color: var(--portal-accent) !important;
+}
+
+.portal-shell [class*="text-amber-"]:not([class*="hover:text-"]),
+.portal-shell [class*="text-yellow-"]:not([class*="hover:text-"]),
+.portal-shell [class*="text-[#f5c451]"]:not([class*="hover:text-"]) {
+  color: var(--portal-gold) !important;
+}
+
+.portal-shell [class~="bg-cyan-50"],
+.portal-shell [class~="bg-cyan-50/60"],
+.portal-shell [class~="bg-cyan-50/80"],
+.portal-shell [class~="bg-cyan-100"],
+.portal-shell [class~="bg-cyan-200/70"],
+.portal-shell [class~="bg-cyan-300/5"],
+.portal-shell [class~="bg-cyan-300/10"],
+.portal-shell [class~="bg-cyan-300/20"],
+.portal-shell [class~="bg-cyan-300/30"],
+.portal-shell [class~="bg-cyan-400/5"],
+.portal-shell [class~="bg-cyan-400/10"],
+.portal-shell [class~="bg-cyan-500/10"],
+.portal-shell [class~="bg-cyan-500/20"],
+.portal-shell [class~="bg-blue-50"],
+.portal-shell [class~="bg-blue-50/60"],
+.portal-shell [class~="bg-blue-50/80"],
+.portal-shell [class~="bg-blue-100"],
+.portal-shell [class~="bg-blue-200/70"],
+.portal-shell [class~="bg-blue-300/20"],
+.portal-shell [class~="bg-blue-300/30"],
+.portal-shell [class~="bg-blue-400/5"],
+.portal-shell [class~="bg-blue-400/20"],
+.portal-shell [class~="bg-blue-500/10"],
+.portal-shell [class~="bg-sky-50"],
+.portal-shell [class~="bg-sky-50/60"],
+.portal-shell [class~="bg-sky-50/80"],
+.portal-shell [class~="bg-indigo-100"],
+.portal-shell [class~="bg-indigo-200/70"],
+.portal-shell [class~="bg-indigo-300/30"],
+.portal-shell [class~="bg-purple-50"],
+.portal-shell [class~="bg-purple-100"],
+.portal-shell [class~="bg-violet-400/10"],
+.portal-shell [class~="bg-[#10C7F4]/10"],
+.portal-shell [class~="bg-[#19C8EE]/10"],
+.portal-shell [class~="dark:bg-[#19C8EE]/10"],
+.portal-shell [class~="dark:bg-[#19C8EE]/15"],
+.portal-shell [class~="dark:bg-blue-400/10"],
+.portal-shell [class~="dark:bg-blue-500/10"],
+.portal-shell [class~="dark:bg-blue-500/20"],
+.portal-shell [class~="dark:bg-cyan-400/10"],
+.portal-shell [class~="dark:bg-cyan-400/5"],
+.portal-shell [class~="dark:bg-cyan-500/10"],
+.portal-shell [class~="dark:bg-cyan-500/20"],
+.portal-shell [class~="dark:bg-cyan-500/5"],
+.portal-shell [class~="dark:bg-indigo-500/20"],
+.portal-shell [class~="dark:bg-purple-500/10"],
+.portal-shell [class~="dark:bg-violet-400/5"] {
+  background-color: var(--portal-accent-soft) !important;
+}
+
+.portal-shell [class~="bg-cyan-500"],
+.portal-shell [class~="bg-cyan-600"],
+.portal-shell [class~="bg-blue-500"],
+.portal-shell [class~="bg-blue-600"],
+.portal-shell [class~="bg-indigo-500"],
+.portal-shell [class~="bg-purple-500"],
+.portal-shell [class~="bg-[#10C7F4]"],
+.portal-shell [class~="bg-[#19C8EE]"] {
+  background-color: var(--portal-accent) !important;
+}
+
+.portal-shell [class*="hover:bg-cyan-"]:hover,
+.portal-shell [class*="hover:bg-blue-"]:hover,
+.portal-shell [class*="hover:bg-sky-"]:hover,
+.portal-shell [class*="hover:bg-indigo-"]:hover,
+.portal-shell [class*="hover:bg-violet-"]:hover,
+.portal-shell [class*="hover:bg-purple-"]:hover,
+.portal-shell [class*="hover:bg-[#10C7F4]"]:hover,
+.portal-shell [class*="hover:bg-[#19C8EE]"]:hover {
+  background-color: var(--portal-accent-soft) !important;
+}
+
+.portal-shell [class*="dark:hover:bg-cyan-"]:hover,
+.portal-shell [class*="dark:hover:bg-blue-"]:hover,
+.portal-shell [class*="dark:hover:bg-[#10C7F4]"]:hover,
+.portal-shell [class*="dark:hover:bg-[#19C8EE]"]:hover {
+  background-color: var(--portal-accent-soft) !important;
+}
+
+.portal-shell [class~="bg-amber-50"],
+.portal-shell [class~="bg-amber-50/70"],
+.portal-shell [class~="bg-amber-100"],
+.portal-shell [class~="bg-amber-400/10"],
+.portal-shell [class~="bg-amber-500/80"],
+.portal-shell [class~="dark:bg-amber-500/10"],
+.portal-shell [class~="dark:bg-amber-900/30"],
+.portal-shell [class~="dark:bg-amber-950/20"],
+.portal-shell [class~="dark:bg-amber-950/30"],
+.portal-shell [class~="dark:bg-yellow-900/30"] {
+  background-color: var(--portal-gold-soft) !important;
+}
+
+.portal-shell [class~="hover:bg-amber-500"]:hover,
+.portal-shell [class~="hover:bg-amber-600"]:hover,
+.portal-shell [class~="hover:bg-yellow-500"]:hover {
+  background-color: var(--portal-gold-soft) !important;
+}
+
+.portal-shell [class*="border-cyan-"]:not([class*="hover:border-"]),
+.portal-shell [class*="border-blue-"]:not([class*="hover:border-"]),
+.portal-shell [class*="border-sky-"]:not([class*="hover:border-"]),
+.portal-shell [class*="border-indigo-"]:not([class*="hover:border-"]),
+.portal-shell [class*="border-violet-"]:not([class*="hover:border-"]),
+.portal-shell [class*="border-purple-"]:not([class*="hover:border-"]),
+.portal-shell [class*="border-[#10C7F4]"]:not([class*="hover:border-"]),
+.portal-shell [class*="border-[#19C8EE]"]:not([class*="hover:border-"]),
+.portal-shell [class*="border-[#155DF5]"]:not([class*="hover:border-"]) {
+  border-color: var(--portal-accent-border) !important;
+}
+
+.portal-shell [class*="hover:border-cyan-"]:hover,
+.portal-shell [class*="hover:border-blue-"]:hover,
+.portal-shell [class*="hover:border-sky-"]:hover,
+.portal-shell [class*="hover:border-indigo-"]:hover,
+.portal-shell [class*="hover:border-violet-"]:hover,
+.portal-shell [class*="hover:border-purple-"]:hover {
+  border-color: var(--portal-accent-border) !important;
+}
+
+.portal-shell [class*="border-amber-"]:not([class*="hover:border-"]),
+.portal-shell [class*="border-yellow-"]:not([class*="hover:border-"]) {
+  border-color: var(--portal-gold-border) !important;
+}
+
+.portal-shell [class*="ring-cyan-"],
+.portal-shell [class*="ring-blue-"],
+.portal-shell [class*="ring-sky-"],
+.portal-shell [class*="ring-indigo-"],
+.portal-shell [class*="focus:ring-cyan-"],
+.portal-shell [class*="focus:ring-blue-"],
+.portal-shell [class*="focus:ring-sky-"],
+.portal-shell [class*="focus:ring-indigo-"] {
+  --tw-ring-color: var(--portal-accent-border) !important;
+}
+
+.portal-shell [class*="shadow-cyan-"],
+.portal-shell [class*="shadow-blue-"],
+.portal-shell [class*="shadow-sky-"],
+.portal-shell [class*="shadow-indigo-"],
+.portal-shell [class*="shadow-violet-"],
+.portal-shell [class*="shadow-purple-"] {
+  --tw-shadow-color: rgb(124 58 237 / 24%) !important;
+}
+
+.portal-shell [class*="from-cyan-"]:not([class*="hover:from-"]),
+.portal-shell [class*="from-blue-"]:not([class*="hover:from-"]),
+.portal-shell [class*="from-sky-"]:not([class*="hover:from-"]),
+.portal-shell [class*="from-indigo-"]:not([class*="hover:from-"]),
+.portal-shell [class*="from-[#10C7F4]"]:not([class*="hover:from-"]),
+.portal-shell [class*="from-[#19C8EE]"]:not([class*="hover:from-"]),
+.portal-shell [class*="from-[#155DF5]"]:not([class*="hover:from-"]),
+.portal-shell [class*="from-[#347DFF]"]:not([class*="hover:from-"]) {
+  --tw-gradient-from: var(--portal-accent) var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: var(--portal-gold) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--portal-gold) var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
+}
+
+.portal-shell [class*="via-cyan-"]:not([class*="hover:via-"]),
+.portal-shell [class*="via-blue-"]:not([class*="hover:via-"]),
+.portal-shell [class*="via-sky-"]:not([class*="hover:via-"]),
+.portal-shell [class*="via-indigo-"]:not([class*="hover:via-"]),
+.portal-shell [class*="via-[#10C7F4]"]:not([class*="hover:via-"]),
+.portal-shell [class*="via-[#19C8EE]"]:not([class*="hover:via-"]) {
+  --tw-gradient-stops: var(--tw-gradient-from), var(--portal-gold) var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
+}
+
+.portal-shell [class*="to-cyan-"]:not([class*="hover:to-"]),
+.portal-shell [class*="to-blue-"]:not([class*="hover:to-"]),
+.portal-shell [class*="to-sky-"]:not([class*="hover:to-"]),
+.portal-shell [class*="to-indigo-"]:not([class*="hover:to-"]),
+.portal-shell [class*="to-[#10C7F4]"]:not([class*="hover:to-"]),
+.portal-shell [class*="to-[#19C8EE]"]:not([class*="hover:to-"]),
+.portal-shell [class*="to-[#155DF5]"]:not([class*="hover:to-"]),
+.portal-shell [class*="to-[#347DFF]"]:not([class*="hover:to-"]) {
+  --tw-gradient-to: var(--portal-gold) var(--tw-gradient-to-position) !important;
+}
+
+html:not(.dark) .portal-shell [class~="text-white"] {
+  color: #1a1033 !important;
+}
+
+html:not(.dark) .portal-shell [class~="text-white"][class*="bg-cyan-500"]:not([class*="bg-cyan-500/"]),
+html:not(.dark) .portal-shell [class~="text-white"][class*="bg-cyan-600"]:not([class*="bg-cyan-600/"]),
+html:not(.dark) .portal-shell [class~="text-white"][class*="bg-blue-500"]:not([class*="bg-blue-500/"]),
+html:not(.dark) .portal-shell [class~="text-white"][class*="bg-blue-600"]:not([class*="bg-blue-600/"]),
+html:not(.dark) .portal-shell [class~="text-white"][class*="bg-[#10C7F4]"]:not([class*="bg-[#10C7F4]/"]),
+html:not(.dark) .portal-shell [class~="text-white"][class*="bg-[#19C8EE]"]:not([class*="bg-[#19C8EE]/"]) {
+  color: #ffffff !important;
+}
+
+html:not(.dark) .portal-shell [class*="dark:border-[#1E293B]"] {
+  border-color: rgb(255 255 255 / 10%) !important;
+}
+
+html:not(.dark) {
+  --auth-page-background: radial-gradient(ellipse at top, #ffffff 0%, #f1f7fb 52%, #e8f0f7 100%);
+}
+
+html:not(.dark) .auth-page,
+html:not(.dark) .portal-shell {
+  color: #0f172a;
+}
+
+html:not(.dark) .auth-page [class~="text-white"],
+html:not(.dark) .auth-page [class*="text-slate-"],
+html:not(.dark) .portal-shell [class*="text-white/"],
+html:not(.dark) .portal-shell [class*="text-slate-"],
+html:not(.dark) .portal-shell [class*="text-gray-"] {
+  color: #655c85 !important;
+}
+
+html:not(.dark) .auth-page [class*="bg-[#081321]"],
+html:not(.dark) .auth-page [class*="bg-[#0B1021]"],
+html:not(.dark) .auth-page [class*="bg-[#0B1726]"],
+html:not(.dark) .auth-page [class*="bg-[#102238]"],
+html:not(.dark) .portal-shell [class*="bg-[#050505]"],
+html:not(.dark) .portal-shell [class*="bg-[#050510]"],
+html:not(.dark) .portal-shell [class*="bg-[#081321]"],
+html:not(.dark) .portal-shell [class*="bg-[#0a0a1a]"],
+html:not(.dark) .portal-shell [class*="bg-[#0A0A0A]"],
+html:not(.dark) .portal-shell [class*="bg-[#0A0E1A]"],
+html:not(.dark) .portal-shell [class*="bg-[#0B1021]"],
+html:not(.dark) .portal-shell [class*="bg-[#0B1726]"],
+html:not(.dark) .portal-shell [class*="bg-[#102238]"],
+html:not(.dark) .portal-shell [class*="bg-gray-800"],
+html:not(.dark) .portal-shell [class*="bg-gray-900"],
+html:not(.dark) .portal-shell [class*="bg-slate-800"],
+html:not(.dark) .portal-shell [class*="bg-slate-900"] {
+  background-color: #f0ebfc !important;
+}
+
+.dark .portal-shell [class*="dark:bg-[#0B1021]"],
+.dark .portal-shell [class*="dark:bg-[#0B1726]"],
+.dark .portal-shell [class*="dark:bg-[#081321]"],
+.dark .portal-shell [class*="dark:bg-[#0a0a1a]"],
+.dark .portal-shell [class*="dark:bg-[#0b0b0e]"],
+.dark .portal-shell [class*="dark:bg-[#0A0E1A]"],
+.dark .portal-shell [class*="dark:bg-gray-800"],
+.dark .portal-shell [class*="dark:bg-gray-900"],
+.dark .portal-shell [class*="dark:bg-slate-800"],
+.dark .portal-shell [class*="dark:bg-slate-900"] {
+  background-color: #120a2a !important;
+}
+
+.dark .portal-shell [class*="dark:bg-blue-"],
+.dark .portal-shell [class*="dark:bg-cyan-"],
+.dark .portal-shell [class*="dark:bg-sky-"],
+.dark .portal-shell [class*="dark:bg-indigo-"],
+.dark .portal-shell [class*="dark:bg-purple-"],
+.dark .portal-shell [class*="dark:bg-violet-"],
+.dark .portal-shell [class*="dark:bg-[#19C8EE]"] {
+  background-color: var(--portal-accent-soft) !important;
+}
+
+.dark .portal-shell [class~="dark:bg-blue-500"],
+.dark .portal-shell [class~="dark:bg-blue-600"],
+.dark .portal-shell [class~="dark:bg-cyan-500"],
+.dark .portal-shell [class~="dark:bg-[#19C8EE]"] {
+  background-color: var(--portal-accent) !important;
+}
+
+.dark .portal-shell [class*="dark:bg-amber-"],
+.dark .portal-shell [class*="dark:bg-yellow-"] {
+  background-color: var(--portal-gold-soft) !important;
+}
+
+.dark .portal-shell [class*="dark:hover:bg-blue-"]:hover,
+.dark .portal-shell [class*="dark:hover:bg-cyan-"]:hover,
+.dark .portal-shell [class*="dark:hover:bg-sky-"]:hover,
+.dark .portal-shell [class*="dark:hover:bg-indigo-"]:hover,
+.dark .portal-shell [class*="dark:hover:bg-[#10C7F4]"]:hover,
+.dark .portal-shell [class*="dark:hover:bg-[#19C8EE]"]:hover {
+  background-color: var(--portal-accent-soft) !important;
+}
+
+.dark .portal-shell [class*="dark:border-[#1E293B]"] {
+  border-color: rgb(255 255 255 / 10%) !important;
+}
+
+.portal-shell [stroke="#06b6d4"],
+.portal-shell [stroke="#10C7F4"],
+.portal-shell [stroke="#19C8EE"] {
+  stroke: var(--portal-accent) !important;
+}
+
+.portal-shell [fill="#06b6d4"],
+.portal-shell [fill="#10C7F4"],
+.portal-shell [fill="#19C8EE"] {
+  fill: var(--portal-accent) !important;
+}
+
+.portal-shell [class*="shadow-["][class*="rgba(25,200,238"],
+.portal-shell [class*="shadow-["][class*="rgba(16,199,244"] {
+  box-shadow: 0 10px 24px rgb(124 58 237 / 18%) !important;
+}
+
+html:not(.dark) .auth-page .referral-placement {
+  background-color: #ffffff !important;
+  background-image: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .marquee, .eq, .dash, .arc, .pulse, .blink, .tile, .candle-bob { animation: none; }
+  .marquee, .eq, .dash, .arc, .pulse, .blink, .tile, .candle-bob,
+  .hero-academy-art, .hero-network-orbit, .hero-art-orbit,
+  .dashboard-banner-orbit, .dashboard-banner-topic-ticker,
+  .hero-network-node {
+    animation: none;
+  }
 }

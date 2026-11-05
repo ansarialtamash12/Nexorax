@@ -76,18 +76,14 @@ export default function Navbar() {
         {/* 💻 DESKTOP MENU */}
         <div className="hidden items-center gap-4 lg:flex">
           <ThemeToggle />
-          <Link href="/login" className="text-sm text-soft hover:text-fg">Login</Link>
-          
-         
+          <a href="/login" className="text-sm text-soft hover:text-fg">Login</a>
           <Btn href="/register">Get Started</Btn>
         </div>
 
         {/* 📱 MOBILE MENU ICONS */}
         <div className="flex items-center gap-3 lg:hidden">
           <ThemeToggle />
-          <Link href="/login" aria-label="Login" className="text-fg">
-            <LogIn size={20} />
-          </Link>
+          <a href="/login" aria-label="Login" className="text-fg"><LogIn size={20} /></a>
           <button aria-label="Menu" aria-expanded={open} onClick={() => setOpen(!open)} className="text-fg">
             {open ? <X /> : <Menu />}
           </button>
@@ -101,13 +97,8 @@ export default function Navbar() {
             <a key={l} href={`#${l.toLowerCase()}`} onClick={() => setOpen(false)} className="block py-3 text-soft">{l}</a>
           ))}
           <div className="mt-3 flex flex-col gap-3">
-            
-            <Btn href="/register" onClick={() => setOpen(false)} className="w-full">
-              Get Started
-            </Btn>
-            <Btn href="/login" ghost onClick={() => setOpen(false)} className="w-full">
-              Login
-            </Btn>
+            <Btn href="/register">Get Started</Btn>
+            <Btn href="/login" ghost>Login</Btn>
           </div>
         </div>
       )}
