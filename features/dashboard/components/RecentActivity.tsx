@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Activity, Bell, Loader2, RefreshCw } from "lucide-react";
+import { IconBox } from "@/components/common/IconBox";
+
 
 type Notification = Record<string, unknown>;
 
@@ -132,42 +134,55 @@ export function RecentActivity() {
 
   return (
     <section className="mt-4" aria-label="Recent activity">
+      {/* Header Section - Same Nexorax Brand Style */}
       <div className="mb-6 flex items-center gap-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-cyan-500/10 shadow-[0_0_16px_rgba(25,200,238,0.1)]">
-          <Activity className="h-5 w-5 text-cyan-600 dark:text-cyan-300" aria-hidden />
-        </div>
+        <IconBox icon={Activity} size="sm" className="rounded-xl" />
         <div>
-          <h2 className="text-lg text-gray-900 dark:text-white md:text-xl">Recent Activity</h2>
-          <p className="text-xs font-bold text-gray-800 dark:text-gray-200">
+          <h2 className="text-lg font-bold text-gray-900 dark:text-white md:text-xl">
+            Recent{" "}
+            <span className="bg-gradient-to-r from-purple-600 via-purple-500 to-yellow-500 bg-clip-text text-transparent">
+              Activity
+            </span>
+          </h2>
+          <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
             Real-time updates from your account
           </p>
         </div>
       </div>
 
-      <div className="overflow-hidden rounded-xl border border-gray-200 bg-gradient-to-br from-gray-50/50 to-white backdrop-blur-sm dark:border-gray-800 dark:from-gray-900/30 dark:to-transparent">
-        <div className="flex items-center justify-between border-b border-gray-200 bg-gradient-to-r from-gray-100/30 to-transparent px-4 py-3 dark:border-gray-800 dark:from-gray-800/20">
+      {/* Main Container - Matched to Nexorax Card Style */}
+      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-[#1E293B] dark:bg-[#0b0b0e]">
+        
+        {/* Top Bar Header */}
+        <div className="flex items-center justify-between border-b border-gray-100 bg-gray-50/50 px-4 py-3 dark:border-[#1E293B] dark:bg-[#15151a] sm:px-6">
           <div className="flex items-center gap-2">
             <div className="flex gap-1.5" aria-hidden>
-              <span className="h-2.5 w-2.5 rounded-full bg-red-500/80 shadow-[0_0_6px_rgba(239,68,68,0.4)]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-amber-500/80 shadow-[0_0_6px_rgba(245,158,11,0.4)]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80 shadow-[0_0_6px_rgba(16,185,129,0.4)]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
+              <span className="h-2.5 w-2.5 rounded-full bg-amber-500/80" />
+              <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
             </div>
-            <span className="ml-2 text-xs font-bold text-gray-800 dark:text-gray-200">
+            <span className="ml-2 text-xs font-bold text-gray-700 dark:text-gray-300">
               activity_feed.log
             </span>
           </div>
-          <div className="flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 shadow-[0_0_12px_rgba(16,185,129,0.08)]">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.4)]" />
-            <span className="text-[10px] text-emerald-500 dark:text-emerald-400">LIVE STREAM</span>
+          
+          {/* Live Stream Badge - Purple Brand Color */}
+          <div className="flex items-center gap-1.5 rounded-full border border-purple-500/20 bg-purple-500/10 px-2.5 py-0.5">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-purple-500" />
+            <span className="text-[10px] font-bold text-purple-600 dark:text-purple-400">
+              LIVE STREAM
+            </span>
           </div>
         </div>
 
-        <div className="border-b border-gray-200 px-4 py-2 dark:border-gray-800">
-          <span className="inline-flex rounded-md bg-cyan-500/10 px-2.5 py-1 text-[10px] text-cyan-700 shadow-[0_0_8px_rgba(25,200,238,0.1)] dark:text-cyan-300">
+        {/* Filter Tag - Purple Brand Color */}
+        <div className="border-b border-gray-100 px-4 py-2 dark:border-[#1E293B] sm:px-6">
+          <span className="inline-flex rounded-md bg-purple-500/10 px-2.5 py-1 text-[10px] font-bold text-purple-700 dark:text-purple-300">
             All Activity
           </span>
         </div>
 
+        {/* Error Banner */}
         {error && activities.length > 0 && (
           <div
             className="flex items-center justify-between gap-3 border-b border-amber-200 bg-amber-50 px-4 py-2 text-xs text-amber-800 dark:border-amber-900/50 dark:bg-amber-950/30 dark:text-amber-200"
@@ -185,10 +200,11 @@ export function RecentActivity() {
           </div>
         )}
 
-        <div className=" overflow-y-auto">
+        {/* Activity List */}
+        <div className="overflow-y-auto">
           {isLoading ? (
             <div className="flex justify-center px-4 py-8">
-              <Loader2 className="h-6 w-6 animate-spin text-cyan-500" aria-label="Loading recent activity" />
+              <Loader2 className="h-6 w-6 animate-spin text-purple-500" aria-label="Loading recent activity" />
             </div>
           ) : error && activities.length === 0 ? (
             <div className="px-4 py-6 text-center">
@@ -199,7 +215,7 @@ export function RecentActivity() {
                   setIsLoading(true);
                   void loadActivities();
                 }}
-                className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-cyan-700 underline dark:text-cyan-300"
+                className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-purple-700 underline dark:text-purple-300"
               >
                 <RefreshCw className="h-3 w-3" aria-hidden />
                 Retry
@@ -223,23 +239,25 @@ export function RecentActivity() {
               return (
                 <div
                   key={String(id)}
-                  className="group flex items-start gap-3 border-b border-gray-100 px-4 py-3 transition-colors last:border-b-0 hover:bg-gray-50 dark:border-gray-800/50 dark:hover:bg-gray-800/30"
+                  className="group flex items-start gap-3 border-b border-gray-100 px-4 py-3 transition-colors last:border-b-0 hover:bg-gray-50 dark:border-[#1E293B] dark:hover:bg-[#15151a] sm:px-6"
                 >
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-cyan-500/20 bg-cyan-500/10 text-cyan-700 dark:text-cyan-300">
+                  {/* Notification Icon - Using Brand Purple */}
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400">
                     <Bell className="h-4 w-4" aria-hidden />
                   </div>
+                  
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <p className="text-xs text-gray-800 dark:text-gray-200">
+                      <p className="text-xs font-semibold text-gray-800 dark:text-gray-200">
                         {getActivityTitle(activity)}
                       </p>
                       {amount && (
-                        <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                        <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
                           {amount}
                         </span>
                       )}
                     </div>
-                    <p className="mt-1 line-clamp-1 text-xs font-bold text-gray-600 dark:text-gray-300">
+                    <p className="mt-1 line-clamp-1 text-[11px] font-medium text-gray-500 dark:text-gray-400">
                       {getActivityDate(activity)}
                     </p>
                   </div>

@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { LogIn, Menu, X } from "lucide-react";
@@ -6,6 +7,7 @@ import { Btn } from "./ui";
 import ThemeToggle from "./theme-toggle";
 import Image from "next/image";
 import Link from "next/link";
+import GoogleTranslate from "./common/GoogleTranslate";
 
 const links = ["About", "Fund", "Tools", "Platform", "Education", "Roadmap", "Contact"];
 
@@ -40,15 +42,22 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-all ${scrolled ? "border-b border-line bg-bg/80 backdrop-blur-xl" : ""}`}>
-      <nav aria-label="Main" className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3">
-    
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all ${
+        scrolled ? "border-b border-line bg-bg/80 backdrop-blur-xl" : ""
+      }`}
+    >
+      <nav
+        aria-label="Main"
+        className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3"
+      >
+        {/* Logo */}
         <Link href="/" className="flex items-center gap-2 text-xl font-extrabold text-fg">
           <Image
             src="/Nexorax-Purple-Gold-Ribbon-Logo.png"
             alt="Nexorax logo"
-            width={160} 
-            height={40} 
+            width={160}
+            height={40}
             className="h-8 w-auto object-contain dark:hidden sm:h-10"
             priority
           />
@@ -62,29 +71,50 @@ export default function Navbar() {
           />
         </Link>
 
+        {/* Desktop Links */}
         <ul className="hidden gap-7 lg:flex">
           {links.map((l) => (
             <li key={l} className="relative">
-              <a href={`#${l.toLowerCase()}`} onClick={() => setActive(l)} className="text-sm font-medium text-soft hover:text-fg">
+              <a
+                href={`#${l.toLowerCase()}`}
+                onClick={() => setActive(l)}
+                className="text-sm font-medium text-soft hover:text-fg"
+              >
                 {l}
               </a>
-              {active === l && <motion.span layoutId="nav" className="absolute -bottom-2 left-0 h-0.5 w-full rounded bg-gold" />}
+              {active === l && (
+                <motion.span
+                  layoutId="nav"
+                  className="absolute -bottom-2 left-0 h-0.5 w-full rounded bg-gold"
+                />
+              )}
             </li>
           ))}
         </ul>
-        
+
         {/* 💻 DESKTOP MENU */}
         <div className="hidden items-center gap-4 lg:flex">
+          <GoogleTranslate />
           <ThemeToggle />
-          <a href="/login" className="text-sm text-soft hover:text-fg">Login</a>
+          <a href="/login" className="text-sm text-soft hover:text-fg">
+            Login
+          </a>
           <Btn href="/register">Get Started</Btn>
         </div>
 
         {/* 📱 MOBILE MENU ICONS */}
         <div className="flex items-center gap-3 lg:hidden">
+          <GoogleTranslate />
           <ThemeToggle />
-          <a href="/login" aria-label="Login" className="text-fg"><LogIn size={20} /></a>
-          <button aria-label="Menu" aria-expanded={open} onClick={() => setOpen(!open)} className="text-fg">
+          <a href="/login" aria-label="Login" className="text-fg">
+            <LogIn size={20} />
+          </a>
+          <button
+            aria-label="Menu"
+            aria-expanded={open}
+            onClick={() => setOpen(!open)}
+            className="text-fg"
+          >
             {open ? <X /> : <Menu />}
           </button>
         </div>
@@ -94,11 +124,20 @@ export default function Navbar() {
       {open && (
         <div className="border-t border-line bg-bg/95 px-5 pb-6 backdrop-blur-xl lg:hidden">
           {links.map((l) => (
-            <a key={l} href={`#${l.toLowerCase()}`} onClick={() => setOpen(false)} className="block py-3 text-soft">{l}</a>
+            <a
+              key={l}
+              href={`#${l.toLowerCase()}`}
+              onClick={() => setOpen(false)}
+              className="block py-3 text-soft"
+            >
+              {l}
+            </a>
           ))}
           <div className="mt-3 flex flex-col gap-3">
             <Btn href="/register">Get Started</Btn>
-            <Btn href="/login" ghost>Login</Btn>
+            <Btn href="/login" ghost>
+              Login
+            </Btn>
           </div>
         </div>
       )}

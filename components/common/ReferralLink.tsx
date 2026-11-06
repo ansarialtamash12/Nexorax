@@ -47,38 +47,41 @@ Start your trading journey today and explore exciting market opportunities. Sign
   return (
     <div className="relative z-10">
       <div className="w-full max-w-xl mx-auto space-y-6 rounded-2xl text-slate-900 dark:text-slate-100">
-        {/* Position Selector */}
+        
+        {/* Position Selector - SOLID COLORS */}
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Position:</span>
           <button
             onClick={() => setPosition("L")}
-            className={`px-4 py-1.5 text-sm font-semibold rounded-lg transition-all ${position === "L"
-              ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 shadow-lg shadow-cyan-500/20"
-              : "border border-slate-200 bg-slate-50 text-slate-600 hover:border-cyan-300 hover:bg-cyan-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:border-cyan-800 dark:hover:bg-cyan-950/30"
-              }`}
+            className={`px-4 py-1.5 text-sm font-semibold rounded-lg transition-all ${
+              position === "L"
+                ? "bg-[#7C3AED] text-[#fff] shadow-md shadow-purple-500/20"
+                : "border border-slate-200 bg-slate-50 text-slate-600 hover:border-purple-300 hover:bg-purple-50 dark:border-[#1E293B] dark:bg-[#15151a] dark:text-slate-300 dark:hover:border-purple-700 dark:hover:bg-purple-950/30"
+            }`}
           >
             Left Position
           </button>
           <button
             onClick={() => setPosition("R")}
-            className={`px-4 py-1.5 text-sm font-semibold rounded-lg transition-all ${position === "R"
-              ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 shadow-lg shadow-cyan-500/20"
-              : "border border-slate-200 bg-slate-50 text-slate-600 hover:border-cyan-300 hover:bg-cyan-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:border-cyan-800 dark:hover:bg-cyan-950/30"
-              }`}
+            className={`px-4 py-1.5 text-sm font-semibold rounded-lg transition-all ${
+              position === "R"
+                ? "bg-[#7C3AED] text-[#fff] shadow-md shadow-purple-500/20"
+                : "border border-slate-200 bg-slate-50 text-slate-600 hover:border-purple-300 hover:bg-purple-50 dark:border-[#1E293B] dark:bg-[#15151a] dark:text-slate-300 dark:hover:border-purple-700 dark:hover:bg-purple-950/30"
+            }`}
           >
             Right Position
           </button>
         </div>
 
-        {/* Referral Box */}
-        <div className="rounded-xl border border-cyan-200 bg-gradient-to-br from-cyan-100 to-sky-200 p-4 shadow-inner dark:border-cyan-900/60 dark:from-[#0B1726] dark:to-[#102238]">
-          <div className="flex items-center gap-2">
-            <p className="relative z-10 text-sm font-semibold text-cyan-900 dark:text-cyan-200">
+        {/* Referral Box - SOLID COLORS */}
+        <div className="rounded-xl border border-gray-200 bg-gray-50 p-4 shadow-sm dark:border-[#1E293B] dark:bg-[#15151a]">
+          <div className="flex items-center gap-2 mb-3">
+            <p className="relative z-10 text-sm font-semibold text-[#7C3AED] dark:text-purple-400">
               Your Referral Link
             </p>
             <button
               onClick={handleCopy}
-              className="relative rounded-md p-1 text-cyan-900 transition-colors hover:bg-cyan-900/10 dark:text-cyan-200 dark:hover:bg-white/10"
+              className="relative rounded-md p-1 text-[#7C3AED] transition-colors hover:bg-purple-100 dark:text-purple-400 dark:hover:bg-purple-900/30"
             >
               <FiCopy className="" />
             </button>
@@ -90,11 +93,11 @@ Start your trading journey today and explore exciting market opportunities. Sign
               onClick={() => {
                 if (referralLink) window.open(referralLink, "_blank");
               }}
-              className="w-full px-3 py-2 text-sm text-gray-800 bg-white border border-gray-300 rounded-lg cursor-pointer sm:flex-1 focus:outline-none"
+              className="w-full px-3 py-2 text-sm text-gray-800 bg-white border border-gray-300 rounded-lg cursor-pointer sm:flex-1 focus:outline-none dark:bg-[#0b0b0e] dark:border-[#1E293B] dark:text-gray-200"
             />
             <button
               onClick={handleCopyClick}
-              className="flex items-center justify-center gap-1 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:brightness-110"
+              className="flex items-center justify-center gap-1 rounded-lg bg-[#7C3AED] px-4 py-2 text-sm font-semibold text-[#fff] transition hover:bg-[#6D28D9]"
             >
               <LinkIcon size={16} />
               Copy
@@ -102,15 +105,15 @@ Start your trading journey today and explore exciting market opportunities. Sign
           </div>
         </div>
 
-        {/* How It Works */}
-        <div className="rounded-xl border border-sky-200 bg-sky-50 p-5 text-sm text-slate-700 shadow-inner dark:border-cyan-900/50 dark:bg-[#0B1726] dark:text-slate-300 sm:text-base">
+        {/* How It Works - SOLID COLORS */}
+        <div className="rounded-xl border border-gray-200 bg-gray-50 p-5 text-sm text-slate-700 shadow-sm dark:border-[#1E293B] dark:bg-[#15151a] dark:text-slate-300 sm:text-base">
           <div className="flex items-center gap-3">
-            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 font-bold text-slate-950">
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#7C3AED] font-bold text-[#fff]">
               <FiHelpCircle className="text-lg" />
             </div>
-            <p className="font-semibold text-cyan-900 dark:text-cyan-200">How Referrals Work</p>
+            <p className="font-semibold text-[#7C3AED] dark:text-purple-400">How Referrals Work</p>
           </div>
-          <ul className="mt-1 list-disc list-inside lg:ml-5">
+          <ul className="mt-3 list-disc list-inside lg:ml-5 space-y-1">
             <li className="text-sm text-slate-600 dark:text-slate-300">
               Share your unique referral link
             </li>
@@ -125,7 +128,8 @@ Start your trading journey today and explore exciting market opportunities. Sign
             </li>
           </ul>
         </div>
-        <div className="mt-2">
+
+        <div className="mt-2 flex flex-wrap gap-2">
           {/* WhatsApp */}
           <a
             href={`https://wa.me/?text=${encodeURIComponent(
@@ -135,7 +139,7 @@ Start your trading journey today and explore exciting market opportunities. Sign
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white bg-[#25D366] hover:bg-[#25D366]/90 focus:ring-4 focus:outline-none focus:ring-[#25D366]/50 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center inline-flex items-center dark:focus:ring-[#25D366]/55 me-2 mb-2"
+            className="text-[#fff] bg-[#25D366] hover:bg-[#25D366]/90 focus:ring-4 focus:outline-none focus:ring-[#25D366]/50 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center inline-flex items-center me-2 mb-2"
           >
             <FaWhatsapp className="w-4 h-4 me-2" />
             WhatsApp
@@ -145,12 +149,10 @@ Start your trading journey today and explore exciting market opportunities. Sign
           <a
             href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
               referralLink
-            )}&quote=${encodeURIComponent(
-              referralMessage
-            )}`}
+            )}&quote=${encodeURIComponent(referralMessage)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2"
+            className="text-[#fff] bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center inline-flex items-center me-2 mb-2"
           >
             <FaFacebookF className="w-4 h-4 me-2" />
             Facebook
@@ -160,23 +162,24 @@ Start your trading journey today and explore exciting market opportunities. Sign
           <a
             href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
               referralMessage
-            )}&url=${encodeURIComponent(
-              referralLink
-            )}`}
+            )}&url=${encodeURIComponent(referralLink)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white bg-[#000000] hover:bg-[#1DA1F2]/90 focus:ring-4 focus:outline-none focus:ring-[#1DA1F2]/50 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center inline-flex items-center dark:focus:ring-[#1DA1F2]/55 me-2 mb-2"
+            className="text-[#fff] bg-[#000000] hover:bg-[#1DA1F2]/90 focus:ring-4 focus:outline-none focus:ring-[#1DA1F2]/50 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center inline-flex items-center me-2 mb-2"
           >
             <FaTwitter className="w-4 h-4 me-2" />
             Twitter
           </a>
+
+          {/* NEXORAX */}
           <a
             href="/"
-            className="text-white bg-[#0088cc] hover:bg-[#0088cc]/90 focus:ring-4 focus:outline-none focus:ring-[#0088cc]/50 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center inline-flex items-center dark:focus:ring-[#0088cc]/55 me-2 mb-2"
+            className="text-[#fff] bg-[#7C3AED] hover:bg-[#6D28D9] focus:ring-4 focus:outline-none focus:ring-purple-500/50 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center inline-flex items-center me-2 mb-2"
           >
             <LinkIcon className="w-4 h-4 me-2" />
             NEXORAX
           </a>
+
           {/* LinkedIn */}
           <a
             href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
@@ -184,7 +187,7 @@ Start your trading journey today and explore exciting market opportunities. Sign
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white bg-[#0077B5] hover:bg-[#0077B5]/90 focus:ring-4 focus:outline-none focus:ring-[#0077B5]/50 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center inline-flex items-center dark:focus:ring-[#0077B5]/55 me-2 mb-2"
+            className="text-[#fff] bg-[#0077B5] hover:bg-[#0077B5]/90 focus:ring-4 focus:outline-none focus:ring-[#0077B5]/50 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center inline-flex items-center me-2 mb-2"
           >
             <svg
               className="w-4 h-4 me-2"
@@ -200,12 +203,10 @@ Start your trading journey today and explore exciting market opportunities. Sign
           <a
             href={`https://t.me/share/url?url=${encodeURIComponent(
               referralLink
-            )}&text=${encodeURIComponent(
-              referralMessage
-            )}`}
+            )}&text=${encodeURIComponent(referralMessage)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white bg-[#0088cc] hover:bg-[#0088cc]/90 focus:ring-4 focus:outline-none focus:ring-[#0088cc]/50 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center inline-flex items-center dark:focus:ring-[#0088cc]/55 me-2 mb-2"
+            className="text-[#fff] bg-[#0088cc] hover:bg-[#0088cc]/90 focus:ring-4 focus:outline-none focus:ring-[#0088cc]/50 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center inline-flex items-center me-2 mb-2"
           >
             <FaTelegramPlane className="w-4 h-4 me-2" />
             Telegram
@@ -215,10 +216,8 @@ Start your trading journey today and explore exciting market opportunities. Sign
           <a
             href={`mailto:?subject=${encodeURIComponent(
               "Join me on NEXORAX"
-            )}&body=${encodeURIComponent(
-              referralMessage
-            )}`}
-            className="text-white bg-[#34495e] hover:bg-[#34495e]/90 focus:ring-4 focus:outline-none focus:ring-[#34495e]/50 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center inline-flex items-center me-2 mb-2"
+            )}&body=${encodeURIComponent(referralMessage)}`}
+            className="text-[#fff] bg-[#34495e] hover:bg-[#34495e]/90 focus:ring-4 focus:outline-none focus:ring-[#34495e]/50 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center inline-flex items-center me-2 mb-2"
           >
             <svg
               className="w-4 h-4 me-2"
