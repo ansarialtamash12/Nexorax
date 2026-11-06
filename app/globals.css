@@ -986,3 +986,19 @@ html:not(.dark) .auth-page .referral-placement {
     animation: none;
   }
 }
+
+
+
+
+
+
+/* translator */
+.goog-te-banner-frame,
+.skiptranslate,
+.goog-te-gadget {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}

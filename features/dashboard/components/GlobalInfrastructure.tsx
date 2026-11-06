@@ -1,13 +1,16 @@
 "use client";
 
-import { CircleDollarSign, TrendingUp } from "lucide-react";
+import { TrendingUp, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useDashboardSummary } from "@/features/dashboard/hooks/useDashboardSummary";
 import { formatCurrency } from "@/lib/utils";
+import { IconBox } from "@/components/common/IconBox";
+
 
 export function GlobalInfrastructure() {
   const { data } = useDashboardSummary();
   const dashboardData = data?.data?.[0];
+  
   const programs = [
     { name: "Trading Account", key: "TradingPackage" },
     { name: "Direct Bonus", key: "DirectBonus" },
@@ -18,69 +21,90 @@ export function GlobalInfrastructure() {
 
   return (
     <div className="mt-4">
+      {/* Header Section */}
       <div className="mb-6 flex items-center gap-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-cyan-500/10">
-          <TrendingUp className="h-5 w-5 text-cyan-600 dark:text-cyan-300" aria-hidden />
-        </div>
+        {/* Yahan use kiya */}
+        <IconBox icon={TrendingUp} size="sm" className="rounded-xl" />
         <div>
-          <h2 className="text-lg text-gray-900 dark:text-white md:text-xl">Executing Trades</h2>
-          <p className="text-xs font-bold text-gray-800 dark:text-gray-200">
+          <h2 className="text-lg font-bold text-gray-900 dark:text-white md:text-xl">
+            Nexorax{" "}
+            <span className="bg-gradient-to-r from-purple-600 via-purple-500 to-yellow-500 bg-clip-text text-transparent">
+              Executing Trades
+            </span>
+          </h2>
+          <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
             Your live self-trading position.
           </p>
         </div>
       </div>
 
-      <section className="w-full rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-[#1E293B] dark:bg-[#0b0b0e] sm:p-6">
-        <div className="grid grid-cols-[1.8fr_0.8fr_0.9fr] items-center border-b border-gray-200 pb-4 text-gray-500 dark:border-[#1E293B] dark:text-gray-400">
-          <div className="text-[12px] font-semibold uppercase tracking-[0.11em] sm:text-sm">PROGRAM</div>
-          <div className="text-center text-[12px] font-semibold uppercase tracking-[0.11em] sm:text-sm">STATUS</div>
-          <div className="text-right text-[12px] font-semibold uppercase tracking-[0.11em] sm:text-sm">AMOUNT</div>
+      <section className="w-full overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-[#1E293B] dark:bg-[#0b0b0e]">
+        {/* Table Header */}
+        <div className="grid grid-cols-[1.5fr_1fr_1fr] items-center border-b border-gray-100 bg-gray-50/50 px-4 py-3 text-gray-500 dark:border-[#1E293B] dark:bg-[#15151a] dark:text-gray-400 sm:px-6">
+          <div className="text-[11px] font-bold uppercase tracking-wider sm:text-xs">Program</div>
+          <div className="text-center text-[11px] font-bold uppercase tracking-wider sm:text-xs">Status</div>
+          <div className="text-right text-[11px] font-bold uppercase tracking-wider sm:text-xs">Amount</div>
         </div>
 
-        {programs.map((program) => {
-          const value = dashboardData?.[program.key] ?? 0;
-          const isStringActive = typeof value === "string" && value === "Active";
-          const numericAmount = typeof value === "number" ? value : 0;
-          const isActive = isStringActive || numericAmount > 0;
+        {/* Data Rows */}
+        <div className="px-4 sm:px-6">
+          {programs.map((program, index) => {
+            const value = dashboardData?.[program.key] ?? 0;
+            const isStringActive = typeof value === "string" && value === "Active";
+            const numericAmount = typeof value === "number" ? value : 0;
+            const isActive = isStringActive || numericAmount > 0;
 
-          return (
-            <div
-              key={program.key}
-              className="grid grid-cols-[1.8fr_0.8fr_0.9fr] items-center border-b border-gray-200 py-5 text-gray-900 last:border-b-0 dark:border-[#1E293B] dark:text-white"
-            >
-              <div className="text-[12px] font-semibold leading-snug ">{program.name}</div>
-              <div className="flex justify-center">
-                <span
-                  aria-label={isActive ? "Active" : "Inactive"}
-                  className={`text-2xl font-bold leading-none ${isActive ? "text-green-500" : "text-red-500"}`}
-                >
-                  {isActive ? "✓" : "✕"}
-                </span>
+            return (
+              <div
+                key={program.key}
+                className={`grid grid-cols-[1.5fr_1fr_1fr] items-center py-4 text-gray-900 dark:text-white ${
+                  index !== programs.length - 1 ? "border-b border-gray-100 dark:border-[#1E293B]" : ""
+                }`}
+              >
+                <div className="text-xs font-semibold sm:text-sm">{program.name}</div>
+                <div className="flex justify-center">
+                  <span
+                    className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide sm:text-[11px] ${
+                      isActive
+                        ? "bg-green-100 text-green-700 dark:bg-green-500/10 dark:text-green-400"
+                        : "bg-red-100 text-red-700 dark:bg-red-500/10 dark:text-red-400"
+                    }`}
+                  >
+                    <span className={`h-1.5 w-1.5 rounded-full ${isActive ? "bg-green-500" : "bg-red-500"}`} />
+                    {isActive ? "Active" : "Inactive"}
+                  </span>
+                </div>
+                <div className="text-right text-xs font-bold sm:text-sm">
+                  {isStringActive ? "Active" : formatCurrency(numericAmount)}
+                </div>
               </div>
-              <div className="text-right font-bold ">
-                {isStringActive ? "Active" : formatCurrency(numericAmount)}
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
 
-        <div className="mt-8 flex justify-center sm:mt-10">
+        {/* Deposit Card */}
+        <div className="mt-6 flex justify-center p-4 sm:mt-8 sm:p-6">
           <Link
             href="/fund-director"
             aria-label="Go to Self Deposit"
-            className="block w-full max-w-[560px] rounded-2xl border border-gray-200 bg-gray-50 px-5 py-7 text-center transition-colors hover:border-cyan-400 hover:bg-cyan-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:border-[#1E293B] dark:bg-[#0b0b0e] dark:hover:border-cyan-800 dark:hover:bg-cyan-950/20 sm:px-8 sm:py-8"
+            className="group relative block w-full max-w-[560px] overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-purple-300 hover:shadow-xl dark:border-[#1E293B] dark:bg-[#0b0b0e] dark:hover:border-purple-800 sm:p-8"
           >
-            <div className="mx-auto mb-4 flex h-[68px] w-[68px] items-center justify-center rounded-xl bg-gradient-to-br from-[#10C7F4] to-[#155DF5] text-[#0B1021] shadow-[0_10px_22px_rgba(25,200,238,0.2)] sm:mb-5 sm:h-[76px] sm:w-[76px]">
-              <CircleDollarSign aria-hidden="true" className="h-9 w-9 sm:h-10 sm:w-10" strokeWidth={2.2} />
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-purple-900/10" />
+            <div className="relative z-10 flex flex-col">
+              {/* Yahan use kiya */}
+              <div className="mx-auto mb-4 sm:mb-5">
+                <IconBox icon={ArrowUpRight} size="md" />
+              </div>
+              <h3 className="text-xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-2xl">
+                Deposit to{" "}
+                <span className="bg-gradient-to-r from-purple-600 to-yellow-500 bg-clip-text text-transparent">
+                  Nexorax
+                </span>
+              </h3>
+              <p className="mx-auto mt-2 max-w-[400px] text-sm leading-relaxed text-gray-500 dark:text-gray-400 sm:text-base">
+                Trade smarter with a strategy designed to optimize your potential returns.
+              </p>
             </div>
-
-            <h3 className="text-2xl font-semibold tracking-[-0.02em] text-gray-900 dark:text-white sm:text-[28px]">
-              Deposit
-            </h3>
-
-            <p className="mx-auto mt-2 max-w-[460px] text-base leading-relaxed text-gray-600 dark:text-gray-400 sm:text-lg">
-              Trade smarter with a strategy designed to optimize your potential returns.
-            </p>
           </Link>
         </div>
       </section>
